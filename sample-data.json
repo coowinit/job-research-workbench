@@ -1,0 +1,966 @@
+{
+  "app": "岗位研究工作台",
+  "version": "1.0.0",
+  "schema_version": "2.0",
+  "exported_at": "2026-09-29T02:55:48.422Z",
+  "jobs": [
+    {
+      "id": "seo",
+      "icon": "🔎",
+      "name": "SEO 专员",
+      "category": "数字营销",
+      "summary": "负责搜索引擎优化、关键词策略、内容规划、技术 SEO 与数据分析。该档案偏向外贸 B2B 独立站场景。",
+      "updated": "2026-09-29",
+      "jdCount": 3,
+      "memo": "观察：AI 搜索、GEO / AEO 正在进入 SEO 岗位要求，但是否已经形成稳定薪资溢价仍需继续观察。",
+      "profile": {
+        "intro": "以自然搜索增长为目标，连接内容、网站技术与数据分析。",
+        "duties": [
+          "关键词研究与页面内容优化",
+          "Google Search Console / GA4 数据分析",
+          "技术 SEO、站点结构与索引问题处理",
+          "与内容、开发、市场团队协作"
+        ],
+        "requirements": [
+          "2–5 年 SEO 经验较常见",
+          "英文阅读能力",
+          "熟悉 WordPress 或 CMS",
+          "能独立输出优化策略和复盘"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-20",
+            "sample": 28,
+            "e1": "6K–9K",
+            "e2": "8K–12K",
+            "e3": "10K–15K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-14",
+            "sample": 19,
+            "e1": "6K–8K",
+            "e2": "8K–11K",
+            "e3": "10K–14K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘页",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-30",
+            "sample": 6,
+            "e1": "7K–9K",
+            "e2": "9K–13K",
+            "e3": "12K–16K",
+            "note": ""
+          },
+          {
+            "name": "行业薪酬报告",
+            "type": "行业报告",
+            "url": "",
+            "grade": "A",
+            "status": "valid",
+            "date": "2026-06-18",
+            "sample": "—",
+            "e1": "6K–9K",
+            "e2": "8K–12K",
+            "e3": "11K–15K",
+            "note": ""
+          },
+          {
+            "name": "历史手工记录",
+            "type": "人工调研",
+            "url": "",
+            "grade": "C",
+            "status": "review",
+            "date": "2025-12-02",
+            "sample": 12,
+            "e1": "5K–8K",
+            "e2": "7K–10K",
+            "e3": "9K–13K",
+            "note": ""
+          }
+        ],
+        "上海": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-18",
+            "sample": 44,
+            "e1": "10K–15K",
+            "e2": "15K–22K",
+            "e3": "20K–30K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-12",
+            "sample": 31,
+            "e1": "10K–14K",
+            "e2": "14K–20K",
+            "e3": "18K–28K",
+            "note": ""
+          },
+          {
+            "name": "行业报告",
+            "type": "行业报告",
+            "url": "",
+            "grade": "A",
+            "status": "valid",
+            "date": "2026-07-01",
+            "sample": "—",
+            "e1": "11K–15K",
+            "e2": "15K–21K",
+            "e3": "20K–29K",
+            "note": ""
+          }
+        ],
+        "北京": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-19",
+            "sample": 38,
+            "e1": "10K–16K",
+            "e2": "15K–23K",
+            "e3": "22K–32K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-10",
+            "sample": 27,
+            "e1": "9K–15K",
+            "e2": "14K–22K",
+            "e3": "20K–30K",
+            "note": ""
+          },
+          {
+            "name": "行业报告",
+            "type": "行业报告",
+            "url": "",
+            "grade": "A",
+            "status": "valid",
+            "date": "2026-06-25",
+            "sample": "—",
+            "e1": "10K–15K",
+            "e2": "15K–22K",
+            "e3": "21K–31K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "外贸 SEO 专员",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-09-18",
+          "exp": "3–5 年",
+          "text": "负责英文独立站 SEO、关键词研究、内容规划、Google Search Console 数据分析及持续优化。"
+        },
+        {
+          "title": "SEO Specialist",
+          "source": "企业官网",
+          "region": "青岛",
+          "date": "2026-09-11",
+          "exp": "3 年以上",
+          "text": "Manage organic search strategy, technical SEO, content optimization, reporting and cross-team execution."
+        },
+        {
+          "title": "SEO 优化师",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-08-29",
+          "exp": "1–3 年",
+          "text": "负责站内优化、关键词布局、内容优化、外链建设以及网站数据监控。"
+        }
+      ],
+      "skills": [
+        "SEO",
+        "Google",
+        "GA4",
+        "Search Console",
+        "WordPress",
+        "英文阅读",
+        "内容策略"
+      ],
+      "conclusions": [
+        "普通执行型 SEO 可按市场中位区间招聘。",
+        "外贸独立站 SEO 若同时负责英文内容、技术优化和 WordPress，应高于普通执行岗。",
+        "3–5 年阶段更看重独立规划与跨团队推动能力。"
+      ],
+      "recommendation": "青岛 3–5 年经验的多数来源集中在 8K–12K；若要求独立负责英文站并兼顾技术 SEO，可考虑 10K–13K。",
+      "trend": [
+        [
+          "2022",
+          "6.5K–9K",
+          "估算"
+        ],
+        [
+          "2023",
+          "7K–10K",
+          "估算"
+        ],
+        [
+          "2024",
+          "7.5K–11K",
+          "估算"
+        ],
+        [
+          "2025",
+          "8K–11K",
+          "估算"
+        ],
+        [
+          "2026",
+          "8K–12K",
+          "当前研究"
+        ]
+      ]
+    },
+    {
+      "id": "web",
+      "icon": "🧩",
+      "name": "网站建设专员",
+      "category": "网站 / 技术",
+      "summary": "负责企业官网建设、WordPress 主题与页面搭建、基础前端、域名主机及上线维护。",
+      "updated": "2026-09-29",
+      "jdCount": 2,
+      "memo": "观察：会 Elementor 的候选人较多，但真正同时具备 WordPress、前端基础和主机运维能力的人才层级差异较大。",
+      "profile": {
+        "intro": "连接设计、前端、CMS 与网站运维的综合岗位。",
+        "duties": [
+          "WordPress 企业官网搭建",
+          "页面与主题样式调整",
+          "域名、SSL、主机与 CDN 基础维护",
+          "处理常见前端与插件冲突"
+        ],
+        "requirements": [
+          "HTML/CSS/JS 基础",
+          "WordPress/Elementor",
+          "基础 PHP 更有优势",
+          "具备网站上线与排错经验"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-17",
+            "sample": 21,
+            "e1": "6K–8K",
+            "e2": "8K–12K",
+            "e3": "10K–15K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-09-05",
+            "sample": 8,
+            "e1": "6K–9K",
+            "e2": "8K–13K",
+            "e3": "11K–16K",
+            "note": ""
+          },
+          {
+            "name": "行业岗位样本",
+            "type": "其他",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-07-20",
+            "sample": 10,
+            "e1": "5K–8K",
+            "e2": "8K–11K",
+            "e3": "10K–14K",
+            "note": ""
+          }
+        ],
+        "上海": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-15",
+            "sample": 35,
+            "e1": "10K–14K",
+            "e2": "14K–20K",
+            "e3": "18K–26K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-22",
+            "sample": 12,
+            "e1": "9K–14K",
+            "e2": "14K–21K",
+            "e3": "19K–28K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "WordPress 网站建设专员",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-09-15",
+          "exp": "3–5 年",
+          "text": "负责 WordPress 企业站搭建、Elementor 页面制作、主题样式修改及网站上线维护。"
+        },
+        {
+          "title": "Web Specialist",
+          "source": "企业官网",
+          "region": "上海",
+          "date": "2026-08-22",
+          "exp": "3 年以上",
+          "text": "Maintain company websites, coordinate landing pages, troubleshoot front-end issues and support CMS operations."
+        }
+      ],
+      "skills": [
+        "WordPress",
+        "Elementor",
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "PHP",
+        "Cloudflare",
+        "主机运维"
+      ],
+      "conclusions": [
+        "纯页面搭建与综合网站建设岗位应分层定薪。",
+        "具备前端排错、PHP 基础和运维能力后，岗位更接近 Web Specialist。",
+        "实际项目作品比单纯证书更重要。"
+      ],
+      "recommendation": "青岛 3–5 年若仅做页面搭建约 8K–10K；若能独立建站并处理主机、DNS、缓存、插件冲突，可向 10K–13K 靠拢。",
+      "trend": [
+        [
+          "2022",
+          "6K–8K",
+          "估算"
+        ],
+        [
+          "2023",
+          "6.5K–9K",
+          "估算"
+        ],
+        [
+          "2024",
+          "7K–10K",
+          "估算"
+        ],
+        [
+          "2025",
+          "7.5K–11K",
+          "估算"
+        ],
+        [
+          "2026",
+          "8K–12K",
+          "当前研究"
+        ]
+      ]
+    },
+    {
+      "id": "sales",
+      "icon": "🌍",
+      "name": "海外销售",
+      "category": "销售 / 外贸",
+      "summary": "负责海外客户开发、询盘跟进、报价谈判、客户维护和订单推进，常与英文能力及行业经验绑定。",
+      "updated": "2026-09-24",
+      "jdCount": 2,
+      "memo": "底薪差异不一定能代表总收入，需要后续把佣金结构、提成口径和成熟市场/新市场拆开研究。",
+      "profile": {
+        "intro": "典型结果导向岗位，底薪只是总薪酬的一部分。",
+        "duties": [
+          "海外客户开发",
+          "询盘与邮件跟进",
+          "报价、谈判与合同推进",
+          "客户关系与回款跟踪"
+        ],
+        "requirements": [
+          "英文沟通能力",
+          "B2B 销售经验",
+          "产品与行业理解",
+          "目标与业绩管理"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-16",
+            "sample": 42,
+            "e1": "6K–10K",
+            "e2": "8K–15K",
+            "e3": "10K–20K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-08",
+            "sample": 26,
+            "e1": "6K–9K",
+            "e2": "8K–14K",
+            "e3": "10K–18K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-28",
+            "sample": 11,
+            "e1": "7K–10K",
+            "e2": "9K–16K",
+            "e3": "12K–22K",
+            "note": ""
+          }
+        ],
+        "深圳": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-20",
+            "sample": 61,
+            "e1": "8K–13K",
+            "e2": "12K–20K",
+            "e3": "16K–28K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-12",
+            "sample": 34,
+            "e1": "8K–12K",
+            "e2": "11K–18K",
+            "e3": "15K–25K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-09-01",
+            "sample": 15,
+            "e1": "9K–14K",
+            "e2": "13K–21K",
+            "e3": "18K–30K",
+            "note": ""
+          }
+        ],
+        "上海": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-19",
+            "sample": 54,
+            "e1": "9K–14K",
+            "e2": "13K–21K",
+            "e3": "18K–30K",
+            "note": ""
+          },
+          {
+            "name": "行业招聘报告",
+            "type": "行业报告",
+            "url": "",
+            "grade": "A",
+            "status": "valid",
+            "date": "2026-07-10",
+            "sample": "—",
+            "e1": "9K–14K",
+            "e2": "13K–20K",
+            "e3": "17K–28K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "海外销售经理",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-09-15",
+          "exp": "3–5 年",
+          "text": "负责海外 B2B 客户开发、报价谈判、订单推进及重点客户维护。"
+        },
+        {
+          "title": "International Sales",
+          "source": "企业官网",
+          "region": "深圳",
+          "date": "2026-09-01",
+          "exp": "3 年以上",
+          "text": "Develop distributors, manage leads, negotiate commercial terms and achieve regional revenue targets."
+        }
+      ],
+      "skills": [
+        "英语",
+        "客户开发",
+        "谈判",
+        "CRM",
+        "B2B",
+        "报价",
+        "渠道开发"
+      ],
+      "conclusions": [
+        "底薪必须和佣金、提成结构一起看。",
+        "成熟客户维护型与新市场开拓型岗位难度不同。",
+        "行业经验、客户资源和英语谈判能力会明显拉开总收入。"
+      ],
+      "recommendation": "青岛 3–5 年底薪可重点观察 8K–15K，但应单独记录提成结构，不能只用月薪区间判断岗位吸引力。",
+      "trend": [
+        [
+          "2022",
+          "7K–11K",
+          "估算"
+        ],
+        [
+          "2023",
+          "7.5K–12K",
+          "估算"
+        ],
+        [
+          "2024",
+          "8K–13K",
+          "估算"
+        ],
+        [
+          "2025",
+          "8K–14K",
+          "估算"
+        ],
+        [
+          "2026",
+          "8K–15K",
+          "当前研究"
+        ]
+      ]
+    },
+    {
+      "id": "designer",
+      "icon": "🎨",
+      "name": "平面 / 视觉设计",
+      "category": "设计",
+      "summary": "负责品牌视觉、宣传物料、电商或官网视觉设计。不同岗位对品牌、UI、电商和视频能力要求差异明显。",
+      "updated": "2026-09-21",
+      "jdCount": 1,
+      "memo": "需要防止把“平面设计、UI、网页视觉、电商美工”混成一个岗位。后续建议拆成子岗位。",
+      "profile": {
+        "intro": "视觉表达岗位，需要结合实际业务场景区分。",
+        "duties": [
+          "品牌与宣传物料设计",
+          "官网 / 电商视觉支持",
+          "活动与社媒素材制作",
+          "维护视觉规范"
+        ],
+        "requirements": [
+          "Photoshop / Illustrator",
+          "作品集",
+          "基础排版与品牌意识",
+          "会 Figma / 视频更有优势"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-13",
+            "sample": 25,
+            "e1": "5K–8K",
+            "e2": "7K–10K",
+            "e3": "9K–13K",
+            "note": ""
+          },
+          {
+            "name": "智联招聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-02",
+            "sample": 18,
+            "e1": "5K–7K",
+            "e2": "7K–10K",
+            "e3": "9K–12K",
+            "note": ""
+          },
+          {
+            "name": "企业样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-18",
+            "sample": 7,
+            "e1": "6K–8K",
+            "e2": "8K–11K",
+            "e3": "10K–14K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "品牌视觉设计师",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-09-12",
+          "exp": "3–5 年",
+          "text": "负责品牌视觉、宣传册、官网图片、展会物料及社媒素材设计。"
+        }
+      ],
+      "skills": [
+        "Photoshop",
+        "Illustrator",
+        "Figma",
+        "品牌设计",
+        "排版",
+        "网页视觉"
+      ],
+      "conclusions": [
+        "设计岗位必须看作品集质量。",
+        "会网页视觉与 Figma 的候选人可覆盖更广业务。",
+        "不要把大量视频剪辑要求无成本叠加到平面岗位。"
+      ],
+      "recommendation": "青岛 3–5 年常见区间约 7K–10K；若要求品牌体系 + 官网视觉 + Figma，可考虑 8K–12K。",
+      "trend": [
+        [
+          "2022",
+          "5.5K–8K",
+          "估算"
+        ],
+        [
+          "2023",
+          "6K–8.5K",
+          "估算"
+        ],
+        [
+          "2024",
+          "6.5K–9K",
+          "估算"
+        ],
+        [
+          "2025",
+          "7K–9.5K",
+          "估算"
+        ],
+        [
+          "2026",
+          "7K–10K",
+          "当前研究"
+        ]
+      ]
+    },
+    {
+      "id": "ads",
+      "icon": "📣",
+      "name": "Google Ads 投放",
+      "category": "数字营销",
+      "summary": "负责 Google Ads 账户、关键词、预算、转化追踪与广告优化，常与外贸获客、GA4/GTM 一起出现。",
+      "updated": "2026-09-19",
+      "jdCount": 1,
+      "memo": "投放岗位不能只看操作年限，更要看预算规模、行业、转化追踪能力和真实 ROI 经验。",
+      "profile": {
+        "intro": "以付费流量和转化效率为目标的效果营销岗位。",
+        "duties": [
+          "Google Ads 账户搭建与优化",
+          "预算和关键词管理",
+          "转化追踪与归因",
+          "报表与 ROI 分析"
+        ],
+        "requirements": [
+          "Google Ads 实操",
+          "GA4 / GTM",
+          "数据分析",
+          "英文广告素材理解"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-09",
+            "sample": 14,
+            "e1": "6K–9K",
+            "e2": "8K–13K",
+            "e3": "11K–18K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-25",
+            "sample": 6,
+            "e1": "7K–10K",
+            "e2": "9K–14K",
+            "e3": "12K–20K",
+            "note": ""
+          }
+        ],
+        "深圳": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-14",
+            "sample": 29,
+            "e1": "9K–14K",
+            "e2": "13K–20K",
+            "e3": "18K–28K",
+            "note": ""
+          },
+          {
+            "name": "企业样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-19",
+            "sample": 9,
+            "e1": "10K–15K",
+            "e2": "14K–22K",
+            "e3": "20K–30K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "Google Ads 优化师",
+          "source": "招聘平台",
+          "region": "青岛",
+          "date": "2026-09-08",
+          "exp": "3–5 年",
+          "text": "负责 Google Ads 账户搭建、预算分配、关键词和广告创意测试，结合 GA4/GTM 进行转化分析。"
+        }
+      ],
+      "skills": [
+        "Google Ads",
+        "GA4",
+        "GTM",
+        "PPC",
+        "转化追踪",
+        "数据分析"
+      ],
+      "conclusions": [
+        "预算规模和 ROI 经验比纯年限更重要。",
+        "懂 GTM 和转化追踪可明显提高岗位价值。",
+        "外贸 B2B 场景应关注询盘质量而不只是 CPL。"
+      ],
+      "recommendation": "青岛 3–5 年可重点看 8K–13K；若能独立处理 GTM、归因与较大广告预算，可向更高区间靠拢。",
+      "trend": [
+        [
+          "2022",
+          "6.5K–9K",
+          "估算"
+        ],
+        [
+          "2023",
+          "7K–10K",
+          "估算"
+        ],
+        [
+          "2024",
+          "7.5K–11K",
+          "估算"
+        ],
+        [
+          "2025",
+          "8K–12K",
+          "估算"
+        ],
+        [
+          "2026",
+          "8K–13K",
+          "当前研究"
+        ]
+      ]
+    },
+    {
+      "id": "content",
+      "icon": "✍️",
+      "name": "英文内容运营",
+      "category": "内容 / 营销",
+      "summary": "负责英文网站、博客、社媒或营销资料内容生产与维护，常与 SEO、行业理解和 AI 辅助写作结合。",
+      "updated": "2026-09-18",
+      "jdCount": 1,
+      "memo": "随着 AI 写作普及，岗位价值可能从纯写作转向选题、研究、编辑、品牌语气和事实核验。",
+      "profile": {
+        "intro": "连接产品知识、英文表达与内容营销的岗位。",
+        "duties": [
+          "英文博客与官网内容",
+          "产品与解决方案文案",
+          "内容日历与选题",
+          "SEO 协作与内容更新"
+        ],
+        "requirements": [
+          "英语写作",
+          "内容编辑",
+          "基础 SEO",
+          "行业研究能力"
+        ]
+      },
+      "regions": {
+        "青岛": [
+          {
+            "name": "BOSS 直聘",
+            "type": "招聘平台",
+            "url": "",
+            "grade": "B",
+            "status": "valid",
+            "date": "2026-09-07",
+            "sample": 16,
+            "e1": "6K–8K",
+            "e2": "8K–11K",
+            "e3": "10K–14K",
+            "note": ""
+          },
+          {
+            "name": "企业招聘样本",
+            "type": "企业官网",
+            "url": "",
+            "grade": "C",
+            "status": "valid",
+            "date": "2026-08-16",
+            "sample": 7,
+            "e1": "6K–9K",
+            "e2": "8K–12K",
+            "e3": "10K–15K",
+            "note": ""
+          }
+        ]
+      },
+      "jds": [
+        {
+          "title": "英文内容运营",
+          "source": "企业招聘",
+          "region": "青岛",
+          "date": "2026-09-06",
+          "exp": "3–5 年",
+          "text": "负责英文官网、博客及营销内容策划与编辑，配合 SEO 团队进行关键词和内容更新。"
+        }
+      ],
+      "skills": [
+        "英文写作",
+        "内容编辑",
+        "SEO",
+        "AI 写作",
+        "行业研究",
+        "WordPress"
+      ],
+      "conclusions": [
+        "纯翻译与内容运营应区分。",
+        "AI 降低初稿成本，但提高了编辑、研究与事实核验的重要性。",
+        "懂 SEO 和 CMS 的内容人员更适合独立站团队。"
+      ],
+      "recommendation": "青岛 3–5 年约 8K–11K；若兼具 SEO、WordPress 和行业内容策划能力，可考虑 9K–12K。",
+      "trend": [
+        [
+          "2022",
+          "5.5K–8K",
+          "估算"
+        ],
+        [
+          "2023",
+          "6K–8.5K",
+          "估算"
+        ],
+        [
+          "2024",
+          "6.5K–9.5K",
+          "估算"
+        ],
+        [
+          "2025",
+          "7K–10K",
+          "估算"
+        ],
+        [
+          "2026",
+          "8K–11K",
+          "当前研究"
+        ]
+      ]
+    }
+  ],
+  "dataset_note": "示例研究数据，用于演示岗位研究工作台的数据结构与导入导出流程；应根据实际调研持续复核与更新。"
+}

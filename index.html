@@ -1,0 +1,2064 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>岗位研究工作台 · 可用版</title>
+<style>
+:root{
+  --bg:#f4f6f8;--panel:#fff;--line:#e2e7ed;--line2:#d4dbe4;--text:#182235;--muted:#6d7785;
+  --soft:#f8fafc;--soft2:#eef2f6;--blue:#2457d6;--blue2:#edf3ff;--green:#157347;--amber:#9a6700;
+  --red:#b42318;--radius:14px;--shadow:0 8px 28px rgba(24,34,53,.055)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
+.topbar{height:66px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30;display:flex;align-items:center}
+.wrap{width:min(1400px,calc(100% - 32px));margin:auto}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:38px;height:38px;border-radius:11px;background:#172033;color:#fff;display:grid;place-items:center;font-weight:800}
+.brand h1{font-size:18px;margin:0}.brand small{display:block;color:var(--muted);margin-top:2px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line2);background:#fff;color:var(--text);padding:9px 13px;border-radius:9px}
+.btn:hover{background:var(--soft)}.btn.primary{background:var(--text);color:#fff;border-color:var(--text)}
+.shell{width:min(1400px,calc(100% - 32px));margin:20px auto 40px;display:grid;grid-template-columns:275px minmax(0,1fr);gap:18px}
+.sidebar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);align-self:start;position:sticky;top:86px;overflow:hidden}
+.side-head{padding:16px;border-bottom:1px solid var(--line)}.side-head strong{font-size:13px}.search{width:100%;margin-top:10px;border:1px solid var(--line2);border-radius:9px;padding:10px 11px;outline:none}
+.search:focus{border-color:#9eb2e5;box-shadow:0 0 0 3px var(--blue2)}
+.job-list{padding:8px;max-height:620px;overflow:auto}.job{width:100%;border:0;background:transparent;text-align:left;display:flex;gap:10px;padding:11px;border-radius:10px;color:var(--text)}
+.job:hover{background:var(--soft)}.job.active{background:var(--blue2)}.job-icon{width:35px;height:35px;border-radius:9px;background:var(--soft2);display:grid;place-items:center;flex:0 0 auto}
+.job-name{font-size:14px;font-weight:800}.job-meta{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+.side-foot{border-top:1px solid var(--line);padding:12px 16px 15px;color:var(--muted);font-size:11px;line-height:1.6}
+.hero,.card,.metric{background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.hero{padding:22px 24px}.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.eyebrow{font-size:12px;color:var(--blue);font-weight:800;margin-bottom:7px}.hero h2{font-size:28px;margin:0 0 8px}.hero p{margin:0;color:var(--muted);line-height:1.7;max-width:820px}
+.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:15px}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--soft);padding:6px 9px;border-radius:999px;font-size:11px;color:#4d5869}
+.dot{width:7px;height:7px;border-radius:50%;background:#2f9e44}
+.tabs{display:flex;gap:4px;background:#fff;border:1px solid var(--line);padding:5px;border-radius:12px;margin-top:18px;overflow:auto}
+.tab{border:0;background:transparent;color:var(--muted);padding:10px 14px;border-radius:8px;white-space:nowrap}.tab:hover{background:var(--soft)}.tab.active{background:var(--text);color:#fff}
+.panel{display:none;margin-top:18px}.panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.metric{padding:16px}.metric .label{font-size:11px;color:var(--muted)}.metric .value{font-size:25px;font-weight:850;margin-top:8px}.metric .note{font-size:11px;color:var(--muted);margin-top:6px}
+.card-head{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:center;gap:12px}.card-title{font-size:15px;font-weight:850}.card-sub{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.5}.card-body{padding:0 18px 18px}
+.toolbar{padding:14px 18px;border-top:1px solid var(--line);display:flex;gap:10px;flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:11px;color:var(--muted);font-weight:800}
+select,input[type=text],input[type=date],textarea{border:1px solid var(--line2);border-radius:9px;padding:10px 12px;background:#fff;color:var(--text)}textarea{min-height:120px;resize:vertical;line-height:1.7;width:100%}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:11px 12px;border-top:1px solid var(--line);text-align:left;vertical-align:top}th{font-size:11px;color:var(--muted);background:#fbfcfd}
+.tag{display:inline-flex;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:800}.tag.a{background:#ecfdf3;color:#067647}.tag.b{background:#eff6ff;color:#175cd3}.tag.c{background:#fff7ed;color:#b54708}.tag.old{background:#fff4e5;color:#9a6700}
+.box{border:1px solid var(--line);border-radius:12px;padding:15px;background:#fbfcfd}.box h4{margin:0 0 9px;font-size:13px}.box p,.box li{font-size:12px;line-height:1.7;color:#4f5968}.box ul{margin:0;padding-left:18px}
+.skills{display:flex;gap:7px;flex-wrap:wrap}.skill{background:var(--soft2);padding:7px 9px;border-radius:8px;font-size:11px}
+.alert{border:1px solid #ead28a;background:#fff9e9;color:#775b08;border-radius:10px;padding:11px 13px;font-size:11px;line-height:1.6}
+.jd{border:1px solid var(--line);border-radius:12px;padding:13px;margin-top:10px}.jd:first-child{margin-top:0}.jdtop{display:flex;justify-content:space-between;gap:12px}.jdtitle{font-weight:800;font-size:12px}.jdmeta{font-size:11px;color:var(--muted);margin-top:4px}.excerpt{margin-top:9px;background:var(--soft);border-radius:8px;padding:9px;font-size:11px;line-height:1.55;color:#596575}
+.chart{height:230px;display:flex;align-items:flex-end;gap:16px;padding:14px 4px 0}.barcol{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}.bar{width:min(54px,70%);background:#d9e4f6;border-radius:8px 8px 3px 3px;min-height:10px}.barval{font-size:11px;font-weight:800;margin-bottom:6px}.barlabel{font-size:10px;color:var(--muted);margin-top:6px;text-align:center}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.year{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}.year strong{display:block;font-size:13px}.year span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.year.real{border-color:#b8c9ef;background:#f7faff}
+.notice{font-size:11px;color:var(--muted);line-height:1.6}.section-gap{margin-top:18px}.hidden{display:none!important}
+.footer{text-align:center;color:var(--muted);font-size:11px;margin-top:16px}
+@media(max-width:1100px){.shell{grid-template-columns:1fr}.sidebar{position:static}.job-list{display:flex;overflow:auto}.job{min-width:200px}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.topbar{height:auto;padding:10px 0}.topbar .wrap,.hero-top{flex-direction:column;align-items:stretch}.shell,.wrap{width:min(100% - 20px,1400px)}.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.hero{padding:18px}.hero h2{font-size:23px}.timeline{grid-template-columns:1fr 1fr}}
+</style>
+
+<style>
+.modal-mask{position:fixed;inset:0;background:rgba(18,27,42,.42);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
+.modal-mask.open{display:flex}
+.modal{width:min(820px,100%);max-height:min(90vh,920px);display:flex;flex-direction:column;overflow:hidden;background:#fff;border-radius:18px;border:1px solid var(--line);box-shadow:0 30px 80px rgba(18,27,42,.22)}
+.modal-head{display:flex;justify-content:space-between;gap:16px;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line);background:#fff;z-index:2}
+.modal-head h3{margin:0;font-size:17px;font-weight:850}
+.modal-body{padding:20px 22px;background:#fbfcfe;overflow:auto}
+.modal-foot{padding:14px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:10px;background:#fff}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px}
+.form-grid .full{grid-column:1/-1}
+.field{gap:8px}
+.field label{font-size:12px;color:#667085;font-weight:800}
+.form-grid input,.form-grid select,.form-grid textarea{width:100%}
+.form-grid input,.form-grid select,.form-grid textarea,
+.search, #memo{
+  border:1px solid #cfd8e3;
+  border-radius:10px;
+  background:#fff;
+  color:var(--text);
+  transition:border-color .18s, box-shadow .18s, background-color .18s;
+  box-shadow:inset 0 1px 2px rgba(16,24,40,.03);
+}
+.form-grid input,.form-grid select{min-height:44px;padding:10px 12px}
+.form-grid textarea,#memo{padding:12px 14px;line-height:1.7;min-height:132px}
+.form-grid textarea{resize:vertical}
+.form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus,.search:focus,#memo:focus{
+  outline:none;border-color:#8ea7e6;box-shadow:0 0 0 4px rgba(36,87,214,.10)
+}
+.form-grid select,input[type=date]{appearance:none;-webkit-appearance:none}
+#fIcon{text-align:center;font-size:22px;padding-inline:0}
+#jText{min-height:150px}
+#fSummary,#fIntro{min-height:118px}
+#fDuties,#fRequirements,#rConclusions{min-height:132px}
+#rRecommendation,#rMemo{min-height:120px}
+.btn{transition:background-color .18s,border-color .18s,color .18s,transform .05s}
+.btn:active{transform:translateY(1px)}
+.danger{border-color:#efc1bc!important;color:#b42318!important}
+.icon-btn{border:0;background:transparent;font-size:22px;line-height:1;color:var(--muted);padding:4px 6px;border-radius:8px}
+.icon-btn:hover{background:var(--soft)}
+.mini-actions{display:flex;gap:6px;align-items:center}
+.mini-btn{border:1px solid var(--line2);background:#fff;border-radius:7px;padding:5px 8px;font-size:10px}
+.mini-btn:hover{background:var(--soft)}
+.import-input{display:none}
+.toast{position:fixed;right:20px;bottom:20px;background:#172033;color:#fff;padding:10px 14px;border-radius:9px;font-size:12px;opacity:0;transform:translateY(10px);transition:.2s;pointer-events:none;z-index:120}
+.toast.show{opacity:1;transform:translateY(0)}
+
+.snapshot-list{display:flex;flex-direction:column;gap:8px}
+.snapshot-item{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.snapshot-info{min-width:0}
+.snapshot-time{font-size:12px;font-weight:800;color:var(--text)}
+.snapshot-meta{font-size:10px;color:var(--muted);margin-top:3px}
+.snapshot-actions{display:flex;gap:6px;flex:0 0 auto}
+.snapshot-empty{font-size:11px;color:var(--muted);padding:4px 0}
+
+
+/* v0.3.2 表单字体与信息密度优化 */
+.modal .field label{font-size:12px}
+.modal .form-grid input,
+.modal .form-grid select,
+.modal .form-grid textarea{
+  font-size:14px;
+}
+.modal .form-grid input,
+.modal .form-grid select{
+  line-height:1.35;
+}
+.modal .form-grid textarea{
+  line-height:1.6;
+}
+.modal .btn{
+  font-size:13px;
+}
+.modal-head h3{
+  font-size:16px;
+}
+.modal .dirty-mark{
+  font-size:10px;
+}
+
+@media(max-width:720px){
+  .modal-mask{padding:12px}
+  .modal{width:100%;max-height:94vh;border-radius:16px}
+  .modal-head,.modal-body,.modal-foot{padding-left:16px;padding-right:16px}
+  .form-grid{grid-template-columns:1fr}
+  .form-grid .full{grid-column:auto}
+}
+
+.modal-head .dirty-mark{
+  display:none;margin-left:8px;padding:3px 7px;border-radius:999px;
+  background:#fff4e5;color:#9a6700;font-size:10px;font-weight:800;vertical-align:middle
+}
+.modal.is-dirty .dirty-mark{display:inline-flex}
+.toast.success{background:#157347}
+.toast.warn{background:#9a6700}
+.toast.error{background:#b42318}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+
+</style>
+
+<style>
+
+/* v0.4.0 响应式增强 */
+@media (max-width:1099px){
+  .shell{
+    grid-template-columns:1fr;
+  }
+  .sidebar{
+    position:static;
+  }
+  .side-head{
+    padding-bottom:12px;
+  }
+  .job-list{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    max-height:none;
+    padding:8px 10px 12px;
+    scroll-snap-type:x proximity;
+  }
+  .job{
+    min-width:210px;
+    flex:0 0 auto;
+    scroll-snap-align:start;
+  }
+  .side-foot{
+    display:none;
+  }
+  .grid-4{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media (max-width:860px){
+  .grid-2,
+  .grid-3{
+    grid-template-columns:1fr;
+  }
+  .toolbar{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .toolbar .field{
+    min-width:0;
+  }
+  .chart{
+    min-width:520px;
+  }
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  table{
+    min-width:720px;
+  }
+  .timeline{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+@media (max-width:719px){
+  body{
+    font-size:14px;
+  }
+  .topbar{
+    height:auto;
+    padding:10px 0;
+  }
+  .topbar .wrap{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+  .brand{
+    align-items:center;
+  }
+  .brand h1{
+    font-size:16px;
+  }
+  .brand small{
+    font-size:11px;
+  }
+  .actions{
+    width:100%;
+  }
+  .actions .btn{
+    flex:1 1 0;
+  }
+  .wrap,
+  .shell{
+    width:min(100% - 20px,1400px);
+  }
+  .shell{
+    margin-top:12px;
+    gap:12px;
+  }
+  .hero{
+    padding:16px;
+  }
+  .hero-top{
+    flex-direction:column;
+    align-items:stretch;
+    gap:14px;
+  }
+  .hero h2{
+    font-size:22px;
+  }
+  .hero p{
+    font-size:13px;
+    line-height:1.65;
+  }
+  .hero-top > .btn{
+    width:100%;
+  }
+  .meta{
+    gap:6px;
+  }
+  .pill{
+    font-size:10px;
+  }
+  .tabs{
+    padding:4px;
+    gap:3px;
+  }
+  .tab{
+    padding:9px 11px;
+    font-size:12px;
+  }
+  .grid-4{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .metric{
+    padding:13px;
+  }
+  .metric .value{
+    font-size:21px;
+  }
+  .card-head{
+    align-items:flex-start;
+    padding:14px 14px 10px;
+  }
+  .card-head > .btn{
+    flex:0 0 auto;
+  }
+  .card-body{
+    padding:0 14px 14px;
+  }
+  .toolbar{
+    grid-template-columns:1fr;
+    padding:12px 14px;
+  }
+  .toolbar select,
+  .toolbar input{
+    width:100%;
+  }
+  .box{
+    padding:13px;
+  }
+  .jdtop{
+    flex-direction:column;
+  }
+  .mini-actions{
+    flex-wrap:wrap;
+  }
+  .timeline{
+    grid-template-columns:1fr 1fr;
+  }
+  .snapshot-item{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .snapshot-actions{
+    width:100%;
+  }
+  .snapshot-actions .mini-btn{
+    flex:1 1 0;
+  }
+  .modal-mask{
+    padding:0;
+    align-items:stretch;
+  }
+  .modal{
+    width:100%;
+    max-height:100vh;
+    height:100vh;
+    border-radius:0;
+    border:0;
+  }
+  .modal-head{
+    padding:14px 16px;
+  }
+  .modal-body{
+    padding:16px;
+  }
+  .modal-foot{
+    padding:12px 16px;
+    gap:8px;
+  }
+  .modal-foot .btn{
+    flex:1 1 0;
+  }
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .form-grid .full{
+    grid-column:auto;
+  }
+  .form-grid input,
+  .form-grid select{
+    min-height:46px;
+  }
+  .form-grid textarea{
+    min-height:120px;
+  }
+  #fDuties,
+  #fRequirements,
+  #rConclusions,
+  #jText{
+    min-height:150px;
+  }
+}
+
+@media (max-width:480px){
+  .logo{
+    width:34px;
+    height:34px;
+    border-radius:9px;
+  }
+  .grid-4{
+    grid-template-columns:1fr;
+  }
+  .timeline{
+    grid-template-columns:1fr;
+  }
+  .job{
+    min-width:180px;
+  }
+  .topbar .actions{
+    flex-direction:column;
+  }
+  .actions .btn{
+    width:100%;
+  }
+  .card-head{
+    flex-direction:column;
+  }
+  .card-head > .btn{
+    width:100%;
+  }
+  .tabs{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .chart{
+    min-width:460px;
+  }
+}
+
+</style>
+<style>
+
+/* v0.4.1 Mobile Compact Layout */
+.mobile-job-toggle,
+.mobile-tab-switch{display:none}
+
+@media (max-width:719px){
+  /* 顶部更紧凑 */
+  .topbar .wrap{gap:8px}
+  .brand small{display:none}
+  .topbar .actions .btn{padding:8px 10px;font-size:12px}
+
+  /* 岗位选择器：默认折叠 */
+  .sidebar{border-radius:12px;overflow:hidden}
+  .mobile-job-toggle{
+    width:100%;display:flex;align-items:center;justify-content:space-between;
+    gap:12px;border:0;background:#fff;color:var(--text);
+    padding:12px 14px;text-align:left
+  }
+  .mobile-job-toggle small{
+    display:block;color:var(--muted);font-size:10px;font-weight:700;margin-bottom:2px
+  }
+  .mobile-job-toggle strong{font-size:14px}
+  .mobile-job-arrow{font-size:18px;color:var(--muted);transition:transform .18s}
+  .sidebar.mobile-open .mobile-job-arrow{transform:rotate(180deg)}
+  .mobile-job-panel{display:none;border-top:1px solid var(--line)}
+  .sidebar.mobile-open .mobile-job-panel{display:block}
+  .side-head{padding:12px}
+  .side-head strong{display:none}
+  .search{margin-top:0}
+  .job-list{
+    display:block;max-height:280px;overflow-y:auto;overflow-x:hidden;
+    padding:6px 8px 10px
+  }
+  .job{min-width:0;width:100%;padding:9px 10px}
+  .side-foot{display:none}
+
+  /* Hero 压缩 */
+  .hero{padding:14px}
+  .hero-top{gap:10px}
+  .eyebrow{margin-bottom:5px}
+  .hero h2{font-size:21px;margin-bottom:6px}
+  .hero p{
+    font-size:12px;line-height:1.6;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden
+  }
+  .hero .meta{margin-top:10px}
+  .hero .pill{
+    padding:4px 7px;font-size:9px
+  }
+  #editBtn{
+    width:auto!important;align-self:flex-start;
+    padding:7px 10px;font-size:11px
+  }
+
+  /* 手机端模块导航用 select，隐藏 tabs */
+  .tabs{display:none}
+  .mobile-tab-switch{
+    display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;
+    margin-top:12px;padding:10px 12px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;box-shadow:var(--shadow)
+  }
+  .mobile-tab-switch label{
+    font-size:11px;color:var(--muted);font-weight:800
+  }
+  .mobile-tab-switch select{
+    width:100%;min-height:38px;padding:7px 10px;font-size:13px
+  }
+
+  /* 4 项指标 2×2 */
+  .grid-4{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:8px!important
+  }
+  .metric{padding:11px 12px}
+  .metric .label{font-size:10px}
+  .metric .value{font-size:19px;margin-top:5px}
+  .metric .note{font-size:9px;margin-top:4px;line-height:1.4}
+
+  /* 卡片与内部 box 轻量化 */
+  .section-gap{margin-top:12px}
+  .card{border-radius:12px}
+  .card-head{padding:13px 14px 8px}
+  .card-title{font-size:14px}
+  .card-sub{font-size:10px}
+  .card-body{padding:0 14px 13px}
+  #profileBox .box,
+  #statusBox .box,
+  #jdStructured .box,
+  #researchBox .box{
+    border:0;border-top:1px solid var(--line);border-radius:0;
+    background:transparent;padding:12px 0;margin-top:0!important
+  }
+  #profileBox .box:first-child,
+  #statusBox .box:first-child,
+  #jdStructured .box:first-child,
+  #researchBox .box:first-child{border-top:0;padding-top:4px}
+  .box h4{font-size:12px;margin-bottom:7px}
+  .box p,.box li{font-size:11px;line-height:1.65}
+  .skill{font-size:10px;padding:5px 7px;border-radius:7px}
+  .skills{gap:6px}
+  .alert{font-size:10px;padding:10px 11px}
+
+  /* 快照 */
+  .snapshot-item{padding:9px 10px}
+  .snapshot-time{font-size:11px}
+  .snapshot-meta{font-size:9px}
+
+  /* 编辑弹窗：手机端成为紧凑编辑器 */
+  .modal-head{padding:12px 14px}
+  .modal-head h3{font-size:15px}
+  .modal-body{padding:12px 14px 18px}
+  .modal-foot{padding:10px 14px}
+  .modal .field{gap:5px}
+  .modal .field label{font-size:10px}
+  .modal .form-grid{gap:11px}
+  .modal .form-grid input,
+  .modal .form-grid select{
+    min-height:40px;padding:8px 10px;font-size:13px
+  }
+  .modal .form-grid textarea{
+    padding:9px 10px;font-size:13px;line-height:1.55;min-height:86px
+  }
+  .modal #fSummary,.modal #fIntro{min-height:86px}
+  .modal #fDuties,.modal #fRequirements,.modal #rConclusions,.modal #jText{min-height:112px}
+
+  /* 岗位编辑：图标 + 名称同一行 */
+  .job-form-grid{
+    grid-template-columns:72px minmax(0,1fr)!important
+  }
+  .job-form-grid .icon-field{grid-column:1}
+  .job-form-grid .name-field{grid-column:2}
+  .job-form-grid .category-field,
+  .job-form-grid .skills-field,
+  .job-form-grid .full{grid-column:1/-1}
+  #fIcon{
+    text-align:center!important;font-size:20px!important;
+    padding:6px!important
+  }
+
+  /* 表单底部按钮 */
+  .modal-foot .btn{min-height:40px;font-size:12px}
+}
+
+@media (max-width:420px){
+  .hero .meta{display:grid;grid-template-columns:1fr 1fr}
+  .hero .pill{justify-content:center}
+}
+
+</style>
+<style>
+
+/* v0.4.2 薪酬研究页手机端收尾 */
+@media (max-width:719px){
+  #salary > .card > .card-head{
+    flex-direction:column;
+    align-items:stretch;
+    gap:10px;
+  }
+  #salary #addSalaryBtn{
+    width:100%;
+    min-height:38px;
+    padding:8px 10px;
+    font-size:12px;
+  }
+  #salary .toolbar{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:12px 14px 14px;
+  }
+  #salary .toolbar .field{
+    min-width:0;
+  }
+  #salary .toolbar select{
+    width:100%;
+    min-height:40px;
+    font-size:13px;
+  }
+
+  /* 数据来源：手机端从横向表格改为纵向卡片 */
+  #salary .table-wrap{
+    overflow:visible;
+    padding:0 12px 12px;
+  }
+  #salary table{
+    min-width:0;
+    width:100%;
+    display:block;
+  }
+  #salary thead{
+    display:none;
+  }
+  #salary tbody{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  #salary tbody tr{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:7px 10px;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:#fff;
+  }
+  #salary tbody td{
+    display:block;
+    padding:0;
+    border:0;
+    font-size:11px;
+    min-width:0;
+  }
+  #salary tbody td:nth-child(1){
+    grid-column:1;
+    font-size:12px;
+    font-weight:800;
+  }
+  #salary tbody td:nth-child(2){
+    grid-column:2;
+    justify-self:end;
+  }
+  #salary tbody td:nth-child(3){
+    grid-column:1;
+    color:var(--muted);
+  }
+  #salary tbody td:nth-child(3)::before{
+    content:"日期：";
+    color:var(--muted);
+  }
+  #salary tbody td:nth-child(4){
+    grid-column:2;
+    color:var(--muted);
+    text-align:right;
+  }
+  #salary tbody td:nth-child(4)::before{
+    content:"样本：";
+  }
+  #salary tbody td:nth-child(5){
+    grid-column:1;
+    font-size:14px;
+    font-weight:850;
+  }
+  #salary tbody td:nth-child(5)::before{
+    content:"薪资：";
+    font-size:10px;
+    font-weight:700;
+    color:var(--muted);
+    margin-right:4px;
+  }
+  #salary tbody td:nth-child(6){
+    grid-column:2;
+    justify-self:end;
+  }
+  #salary tbody .mini-actions{
+    justify-content:flex-end;
+    flex-wrap:nowrap;
+  }
+
+  /* 来源区间图表单独横向滚动，不撑宽整个页面 */
+  #salary .card-body{
+    min-width:0;
+  }
+  #salary .chart{
+    min-width:460px;
+  }
+  #salary .card:has(#salaryChart) .card-body{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  #salaryConclusion{
+    min-width:0;
+    position:sticky;
+    left:0;
+  }
+}
+
+@media (max-width:460px){
+  #salary .toolbar{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+<style>
+
+/* v0.4.3 修复手机端薪酬研究页横向撑宽 */
+@media (max-width:719px){
+  html,body{
+    max-width:100%;
+    overflow-x:hidden;
+  }
+
+  .shell,
+  main,
+  .panel,
+  .card,
+  .card-head,
+  .card-body,
+  .grid-2,
+  .grid-3,
+  .grid-4{
+    min-width:0;
+    max-width:100%;
+  }
+
+  main{
+    width:100%;
+    overflow:hidden;
+  }
+
+  .grid-2 > *,
+  .grid-3 > *,
+  .grid-4 > *{
+    min-width:0;
+    max-width:100%;
+  }
+
+  /* Hero 元信息不能反向撑宽主内容 */
+  .hero,
+  .hero-top,
+  .hero .meta{
+    min-width:0;
+    max-width:100%;
+  }
+  .hero .meta{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  }
+  .hero .pill{
+    min-width:0;
+    max-width:100%;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  /* 模块选择器严格限制在容器宽度内 */
+  .mobile-tab-switch{
+    width:100%;
+    min-width:0;
+    grid-template-columns:auto minmax(0,1fr);
+  }
+  .mobile-tab-switch select{
+    min-width:0;
+    max-width:100%;
+  }
+
+  /* 薪酬研究主卡 */
+  #salary,
+  #salary > .card,
+  #salary .grid-2,
+  #salary .grid-2 > .card{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+
+  #salary > .card > .card-head{
+    width:100%;
+  }
+
+  #salary #addSalaryBtn{
+    max-width:100%;
+    box-sizing:border-box;
+  }
+
+  #salary .toolbar{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+  }
+
+  #salary .toolbar .field,
+  #salary .toolbar select{
+    min-width:0;
+    max-width:100%;
+  }
+
+  /* 手机端数据来源卡片绝不能带桌面表格的最小宽度 */
+  #salary .table-wrap{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+    overflow:visible;
+  }
+  #salary table,
+  #salary tbody,
+  #salary tbody tr{
+    width:100%;
+    min-width:0!important;
+    max-width:100%;
+  }
+
+  /* 图表本身占满容器，内部横向滚动 */
+  #salary .card:has(#salaryChart) .card-body{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+    overflow:hidden;
+  }
+  #salary .chart{
+    width:100%!important;
+    max-width:100%;
+    min-width:0!important;
+    overflow-x:auto;
+    overflow-y:hidden;
+    justify-content:flex-start;
+    gap:10px;
+    padding-bottom:6px;
+    -webkit-overflow-scrolling:touch;
+  }
+  #salary .chart .barcol{
+    flex:0 0 58px;
+    min-width:58px;
+  }
+  #salaryConclusion{
+    width:100%;
+    min-width:0;
+    max-width:100%;
+    position:static;
+  }
+}
+
+</style>
+<style>
+
+/* v0.4.4 薪资区间对比图 */
+.salary-range-chart{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  padding:4px 0 16px;
+}
+.salary-range-axis{
+  display:grid;
+  grid-template-columns:118px minmax(0,1fr);
+  gap:12px;
+  align-items:end;
+}
+.salary-range-axis-track{
+  position:relative;
+  height:24px;
+  border-bottom:1px solid var(--line2);
+}
+.salary-range-tick{
+  position:absolute;
+  bottom:-5px;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.salary-range-tick::before{
+  content:"";
+  display:block;
+  width:1px;
+  height:6px;
+  background:var(--line2);
+  margin:0 auto 3px;
+}
+.salary-range-row{
+  display:grid;
+  grid-template-columns:118px minmax(0,1fr);
+  gap:12px;
+  align-items:center;
+}
+.salary-range-name{
+  min-width:0;
+  font-size:11px;
+  color:#475467;
+  text-align:right;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.salary-range-track{
+  position:relative;
+  height:34px;
+  border-radius:8px;
+  background:
+    linear-gradient(to right, rgba(24,34,53,.035) 1px, transparent 1px);
+  background-size:25% 100%;
+}
+.salary-range-segment{
+  position:absolute;
+  top:8px;
+  height:18px;
+  border-radius:999px;
+  background:#dbe6f7;
+  border:1px solid #bfd0ef;
+  min-width:8px;
+}
+.salary-range-segment::before,
+.salary-range-segment::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:6px;
+  height:6px;
+  margin-top:-3px;
+  border-radius:50%;
+  background:#315fa9;
+}
+.salary-range-segment::before{left:-3px}
+.salary-range-segment::after{right:-3px}
+.salary-range-value{
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  font-weight:800;
+  color:var(--text);
+  white-space:nowrap;
+}
+.salary-consensus{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:2px 0 14px;
+  padding:10px 12px;
+  border:1px solid #d9e4f6;
+  background:#f7faff;
+  border-radius:10px;
+  font-size:11px;
+  color:#475467;
+}
+.salary-consensus strong{
+  color:var(--text);
+}
+.salary-consensus-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#e8f0ff;
+  color:#2457d6;
+  font-weight:800;
+  font-size:10px;
+}
+
+@media (max-width:719px){
+  .salary-range-chart{
+    min-width:0;
+    width:100%;
+    gap:10px;
+  }
+  .salary-range-axis,
+  .salary-range-row{
+    grid-template-columns:78px minmax(0,1fr);
+    gap:8px;
+  }
+  .salary-range-name{
+    font-size:10px;
+  }
+  .salary-range-track{
+    height:38px;
+  }
+  .salary-range-segment{
+    top:10px;
+  }
+  .salary-range-value{
+    font-size:9px;
+  }
+  .salary-range-tick{
+    font-size:9px;
+  }
+  /* 新图表本身完全自适应，不再横向滚动 */
+  #salary .card:has(#salaryChart) .card-body{
+    overflow:visible!important;
+  }
+  #salary .chart{
+    min-width:0!important;
+    width:100%!important;
+    overflow:visible!important;
+    height:auto!important;
+    display:block!important;
+    padding:0!important;
+  }
+}
+
+</style>
+<style>
+
+/* v0.4.5 薪资区间图桌面 / 手机统一修复 */
+#salaryChart{
+  display:block!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:auto!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+
+#salaryChart .salary-consensus{
+  width:100%;
+  box-sizing:border-box;
+}
+
+#salaryChart .salary-range-chart{
+  width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+
+/* 桌面端保持图表舒展 */
+@media (min-width:720px){
+  #salaryChart .salary-range-axis,
+  #salaryChart .salary-range-row{
+    grid-template-columns:105px minmax(0,1fr);
+    gap:14px;
+  }
+  #salaryChart .salary-range-chart{
+    padding:8px 2px 14px;
+    gap:14px;
+  }
+  #salaryChart .salary-range-name{
+    font-size:11px;
+  }
+  #salaryChart .salary-range-track{
+    height:38px;
+  }
+  #salaryChart .salary-range-segment{
+    top:10px;
+  }
+  #salaryChart .salary-range-axis-track{
+    margin:0 8px;
+  }
+  #salaryChart .salary-range-track{
+    margin:0 8px;
+  }
+}
+
+/* 手机端进一步紧凑，避免首尾刻度贴边 */
+@media (max-width:719px){
+  #salaryChart .salary-range-axis,
+  #salaryChart .salary-range-row{
+    grid-template-columns:72px minmax(0,1fr);
+    gap:7px;
+  }
+  #salaryChart .salary-range-axis-track,
+  #salaryChart .salary-range-track{
+    margin-left:5px;
+    margin-right:5px;
+  }
+  #salaryChart .salary-range-name{
+    font-size:10px;
+  }
+  #salaryChart .salary-range-value{
+    font-size:9px;
+  }
+  #salaryChart .salary-consensus{
+    gap:6px;
+    padding:9px 10px;
+    font-size:10px;
+  }
+}
+
+</style>
+<style>
+
+/* v0.5.0 数据模型标准化 */
+.tag.valid{background:#ecfdf3;color:#067647}
+.tag.review{background:#fff7ed;color:#b54708}
+.tag.expired{background:#fff4e5;color:#9a6700}
+.tag.archived{background:#f2f4f7;color:#667085}
+.source-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
+.source-link{color:#2457d6;text-decoration:none;font-size:10px}
+.source-link:hover{text-decoration:underline}
+.source-note{margin-top:6px;font-size:10px;color:var(--muted);line-height:1.5}
+@media(max-width:719px){
+  #salary tbody td:nth-child(1){grid-column:1/-1}
+  #salary tbody td:nth-child(2){grid-column:1}
+  #salary tbody td:nth-child(3){grid-column:2;justify-self:end}
+  #salary tbody td:nth-child(4){grid-column:1;color:var(--muted)}
+  #salary tbody td:nth-child(4)::before{content:"日期："}
+  #salary tbody td:nth-child(5){grid-column:2;color:var(--muted);text-align:right}
+  #salary tbody td:nth-child(5)::before{content:"样本："}
+  #salary tbody td:nth-child(6){grid-column:1;font-size:14px;font-weight:850}
+  #salary tbody td:nth-child(6)::before{content:"薪资：";font-size:10px;font-weight:700;color:var(--muted);margin-right:4px}
+  #salary tbody td:nth-child(7){grid-column:2;justify-self:end}
+}
+
+</style>
+<style>
+
+/* v0.5.1 Final Polish */
+@media (min-width:720px){
+  #salary .grid-2{
+    grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);
+  }
+  #salary table{
+    font-size:11px;
+  }
+  #salary th,
+  #salary td{
+    padding:9px 10px;
+  }
+  #salary th{
+    font-size:10px;
+  }
+  #salary .mini-btn{
+    padding:4px 7px;
+  }
+  .job{
+    padding:9px 10px;
+  }
+  .job-name{
+    font-size:13px;
+  }
+  .job-meta{
+    font-size:10px;
+    line-height:1.35;
+  }
+}
+
+/* 正常状态弱化，异常状态突出 */
+.tag.valid{
+  background:transparent!important;
+  color:#5f6b7a!important;
+  padding-left:0!important;
+  padding-right:0!important;
+}
+.tag.valid::before{
+  content:"●";
+  color:#2f9e44;
+  font-size:8px;
+  margin-right:4px;
+}
+.tag.review,
+.tag.expired,
+.tag.archived{
+  font-weight:800;
+}
+
+/* 手机端数据来源卡片重新排版 */
+@media (max-width:719px){
+  #salary tbody tr{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:6px 10px;
+    padding:11px 12px;
+  }
+  #salary tbody td:nth-child(1){
+    grid-column:1;
+    grid-row:1;
+    font-size:12px;
+    font-weight:850;
+  }
+  #salary tbody td:nth-child(3){
+    grid-column:2;
+    grid-row:1;
+    justify-self:end;
+    align-self:start;
+  }
+  #salary tbody td:nth-child(2){
+    grid-column:1/-1;
+    grid-row:2;
+    display:flex;
+    gap:6px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  #salary tbody td:nth-child(4){
+    grid-column:1;
+    grid-row:3;
+    color:var(--muted);
+    font-size:10px;
+  }
+  #salary tbody td:nth-child(4)::before{
+    content:"";
+  }
+  #salary tbody td:nth-child(5){
+    grid-column:2;
+    grid-row:3;
+    color:var(--muted);
+    font-size:10px;
+    text-align:right;
+  }
+  #salary tbody td:nth-child(5)::before{
+    content:"样本 ";
+  }
+  #salary tbody td:nth-child(6){
+    grid-column:1;
+    grid-row:4;
+    font-size:15px;
+    font-weight:850;
+    color:var(--text);
+  }
+  #salary tbody td:nth-child(6)::before{
+    content:"";
+  }
+  #salary tbody td:nth-child(7){
+    grid-column:2;
+    grid-row:4;
+    justify-self:end;
+    align-self:center;
+  }
+  #salary tbody td:nth-child(1) .source-meta{
+    margin-top:4px;
+  }
+  #salary tbody td:nth-child(1) .source-note{
+    margin-top:4px;
+    font-size:9px;
+  }
+  #salary .tag{
+    font-size:9px;
+    padding:3px 6px;
+  }
+  #salary .tag.valid{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+  #salary .mini-btn{
+    padding:4px 7px;
+    font-size:9px;
+  }
+}
+
+</style>
+<style>
+
+/* v0.5.2 修复手机端可信度 / 日期字段语义 */
+@media (max-width:719px){
+  /* 清理旧版 nth-child 伪标签，避免“日期：B” */
+  #salary tbody td:nth-child(3)::before{
+    content:"可信度 ";
+    color:var(--muted);
+    font-size:9px;
+    font-weight:700;
+    margin-right:4px;
+  }
+
+  #salary tbody td:nth-child(4)::before{
+    content:"日期 ";
+    color:var(--muted);
+    font-size:10px;
+    font-weight:400;
+    margin-right:3px;
+  }
+
+  #salary tbody td:nth-child(5)::before{
+    content:"样本 ";
+    color:var(--muted);
+    font-size:10px;
+    font-weight:400;
+    margin-right:3px;
+  }
+
+  #salary tbody td:nth-child(6)::before{
+    content:"";
+  }
+
+  /* 顶部可信度保持一行，避免标签错位 */
+  #salary tbody td:nth-child(3){
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    gap:2px;
+    white-space:nowrap;
+    color:var(--muted);
+    font-size:9px;
+  }
+
+  #salary tbody td:nth-child(3) .tag{
+    margin:0;
+  }
+
+  /* 日期与样本保持同一视觉层级 */
+  #salary tbody td:nth-child(4),
+  #salary tbody td:nth-child(5){
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+  }
+
+  #salary tbody td:nth-child(5){
+    justify-content:flex-end;
+  }
+}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand"><div class="logo">JR</div><div><h1>岗位研究工作台</h1><small>Job Research Workbench · v1.0.0</small></div></div>
+    <div class="actions"><button class="btn" id="exportBtn">导出 JSON</button><button class="btn primary" id="newBtn">+ 新建岗位</button></div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="sidebar">
+    <button class="mobile-job-toggle" id="mobileJobToggle" type="button">
+      <span><small>当前岗位</small><strong id="mobileJobName">选择岗位</strong></span>
+      <span class="mobile-job-arrow">⌄</span>
+    </button>
+    <div class="mobile-job-panel" id="mobileJobPanel">
+      <div class="side-head"><strong>岗位档案</strong><input id="search" class="search" placeholder="搜索岗位名称 / 分类"></div>
+      <div class="job-list" id="jobList"></div>
+    </div>
+    <div class="side-foot">数据原则：保留来源、日期、样本量和人工判断。超过 180 天的数据标记复核，不自动删除。</div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="hero-top">
+        <div>
+          <div class="eyebrow" id="eyebrow"></div>
+          <h2 id="jobTitle"></h2>
+          <p id="jobSummary"></p>
+          <div class="meta" id="jobMeta"></div>
+        </div>
+        <button class="btn" id="editBtn">编辑岗位档案</button>
+      </div>
+    </section>
+
+    <div class="mobile-tab-switch">
+      <label for="mobileTabSelect">当前模块</label>
+      <select id="mobileTabSelect">
+        <option value="overview">岗位概览</option>
+        <option value="salary">薪酬研究</option>
+        <option value="jd">JD 研究</option>
+        <option value="research">研究结论</option>
+        <option value="trend">历史趋势</option>
+        <option value="data">数据管理</option>
+      </select>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="overview">岗位概览</button>
+      <button class="tab" data-tab="salary">薪酬研究</button>
+      <button class="tab" data-tab="jd">JD 研究</button>
+      <button class="tab" data-tab="research">研究结论</button>
+      <button class="tab" data-tab="trend">历史趋势</button>
+      <button class="tab" data-tab="data">数据管理</button>
+    </nav>
+
+    <section class="panel active" id="overview">
+      <div class="grid-4" id="metrics"></div>
+      <div class="grid-2 section-gap">
+        <div class="card"><div class="card-head"><div><div class="card-title">岗位画像</div><div class="card-sub">从多份 JD 中提炼出的共性，不覆盖原始资料</div></div></div><div class="card-body" id="profileBox"></div></div>
+        <div class="card"><div class="card-head"><div><div class="card-title">研究状态</div><div class="card-sub">数据新鲜度、缺口和下一轮调研建议</div></div></div><div class="card-body" id="statusBox"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="salary">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">薪酬研究</div><div class="card-sub">岗位 × 经验 × 地区，多来源交叉验证</div></div><button class="btn" id="addSalaryBtn">+ 添加来源</button></div>
+        <div class="toolbar">
+          <div class="field"><label>地区</label><select id="regionSelect"></select></div>
+          <div class="field"><label>经验</label><select id="expSelect"><option value="e1">1–3 年</option><option value="e2" selected>3–5 年</option><option value="e3">5 年以上</option></select></div>
+        </div>
+      </div>
+      <div class="grid-2 section-gap">
+        <div class="card"><div class="card-head"><div><div class="card-title">数据来源</div><div class="card-sub">来源等级：A 官方/大样本；B 主流招聘平台；C 企业/行业小样本</div></div></div><div class="table-wrap"><table><thead><tr><th>来源</th><th>类型 / 状态</th><th>可信度</th><th>日期</th><th>样本量</th><th>薪资</th><th>操作</th></tr></thead><tbody id="salaryRows"></tbody></table></div></div>
+        <div class="card"><div class="card-head"><div><div class="card-title">薪资区间对比</div><div class="card-sub">直接比较各来源最低值、最高值与共同区间</div></div></div><div class="card-body"><div class="chart" id="salaryChart"></div><div class="box" id="salaryConclusion"></div></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="jd">
+      <div class="grid-2">
+        <div class="card"><div class="card-head"><div><div class="card-title">JD 原始资料</div><div class="card-sub">保留原始样本，便于复核、重新提炼和 AI 辅助分析</div></div><button class="btn" id="addJdBtn">+ 添加 JD</button></div><div class="card-body" id="jdList"></div></div>
+        <div class="card"><div class="card-head"><div><div class="card-title">结构化整理</div><div class="card-sub">岗位简介 / 岗位职责 / 任职要求</div></div></div><div class="card-body" id="jdStructured"></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="research">
+      <div class="grid-2">
+        <div class="card"><div class="card-head"><div><div class="card-title">人工研究结论</div><div class="card-sub">事实、推测、判断分开保存</div></div><button class="btn" id="editResearchBtn">编辑</button></div><div class="card-body" id="researchBox"></div></div>
+        <div class="card"><div class="card-head"><div><div class="card-title">研究备忘</div><div class="card-sub">尚未验证的观察与下一步假设</div></div></div><div class="card-body"><textarea id="memo"></textarea><div class="notice" style="margin-top:8px">人工备忘不会被自动分析覆盖。</div></div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="trend">
+      <div class="card">
+        <div class="card-head"><div><div class="card-title">近 5 年薪资趋势</div><div class="card-sub">2026 为当前研究值；2022–2025 为估算时必须明确标记，避免与真实采集混淆</div></div></div>
+        <div class="card-body"><div class="timeline" id="trendBox"></div><div class="alert" style="margin-top:14px">建议：历史趋势只用于方向观察。未来每次重新调研时保存真实快照，逐步用真实采集替换早期估算值。</div></div>
+      </div>
+    </section>
+
+    <section class="panel" id="data">
+      <div class="grid-2">
+        <div class="card"><div class="card-head"><div><div class="card-title">数据备份</div><div class="card-sub">JSON 用于外部备份；快照用于浏览器内快速回滚</div></div></div><div class="card-body"><div class="actions"><button class="btn primary" id="exportBtn2">导出全部 JSON</button><button class="btn" id="importBtn">导入 JSON</button><button class="btn" id="snapshotBtn">创建快照</button></div><div class="box" style="margin-top:14px"><h4>本地快照</h4><div id="snapshotList" class="snapshot-list"></div></div><div class="box" style="margin-top:14px"><h4>推荐演进</h4><p>当前：localStorage → 数据量明显增大后：IndexedDB → 真正需要复杂查询 / 多人协作时再考虑 SQLite 或服务端数据库。</p></div></div></div>
+        <div class="card"><div class="card-head"><div><div class="card-title">数据质量规则</div><div class="card-sub">比自动抓取更值得长期维护</div></div></div><div class="card-body"><div class="box"><ul><li>薪酬必须记录来源、日期、地区、经验段和样本量（如有）。</li><li>原始 JD 与结构化结论分开。</li><li>超过 180 天标记待复核，不自动删除。</li><li>估算值与实采值必须明显区分。</li><li>人工研究结论不能被自动任务覆盖。</li></ul></div></div></div>
+      </div>
+    </section>
+    <div class="footer">岗位研究工作台 · 以岗位为中心，数据可追溯，判断可积累。</div>
+  </main>
+</div>
+
+<div class="modal-mask" id="modalMask">
+  <div class="modal">
+    <div class="modal-head">
+      <div><h3 id="modalTitle" style="display:inline">编辑</h3><span class="dirty-mark">未保存</span></div>
+      <button class="icon-btn" id="modalClose">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot" id="modalFoot"></div>
+  </div>
+</div>
+<input type="file" id="importInput" class="import-input" accept=".json,application/json">
+<div class="toast" id="toast"></div>
+
+<script>
+const SEED_DB = [{"id":"seo","icon":"🔎","name":"SEO 专员","category":"数字营销","summary":"负责搜索引擎优化、关键词策略、内容规划、技术 SEO 与数据分析。该档案偏向外贸 B2B 独立站场景。","updated":"2026-09-28","jdCount":3,"memo":"观察：AI 搜索、GEO / AEO 正在进入 SEO 岗位要求，但是否已经形成稳定薪资溢价仍需继续观察。","profile":{"intro":"以自然搜索增长为目标，连接内容、网站技术与数据分析。","duties":["关键词研究与页面内容优化","Google Search Console / GA4 数据分析","技术 SEO、站点结构与索引问题处理","与内容、开发、市场团队协作"],"requirements":["2–5 年 SEO 经验较常见","英文阅读能力","熟悉 WordPress 或 CMS","能独立输出优化策略和复盘"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-20","sample":28,"e1":"6K–9K","e2":"8K–12K","e3":"10K–15K"},{"name":"智联招聘","grade":"B","date":"2026-09-14","sample":19,"e1":"6K–8K","e2":"8K–11K","e3":"10K–14K"},{"name":"企业招聘页","grade":"C","date":"2026-08-30","sample":6,"e1":"7K–9K","e2":"9K–13K","e3":"12K–16K","type":"企业官网"},{"name":"行业薪酬报告","grade":"A","date":"2026-06-18","sample":"—","e1":"6K–9K","e2":"8K–12K","e3":"11K–15K"},{"name":"历史手工记录","grade":"C","date":"2025-12-02","sample":12,"e1":"5K–8K","e2":"7K–10K","e3":"9K–13K"}],"上海":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-18","sample":44,"e1":"10K–15K","e2":"15K–22K","e3":"20K–30K"},{"name":"智联招聘","grade":"B","date":"2026-09-12","sample":31,"e1":"10K–14K","e2":"14K–20K","e3":"18K–28K"},{"name":"行业报告","grade":"A","date":"2026-07-01","sample":"—","e1":"11K–15K","e2":"15K–21K","e3":"20K–29K"}],"北京":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-19","sample":38,"e1":"10K–16K","e2":"15K–23K","e3":"22K–32K"},{"name":"智联招聘","grade":"B","date":"2026-09-10","sample":27,"e1":"9K–15K","e2":"14K–22K","e3":"20K–30K"},{"name":"行业报告","grade":"A","date":"2026-06-25","sample":"—","e1":"10K–15K","e2":"15K–22K","e3":"21K–31K"}]},"jds":[{"title":"外贸 SEO 专员","source":"招聘平台","region":"青岛","date":"2026-09-18","exp":"3–5 年","text":"负责英文独立站 SEO、关键词研究、内容规划、Google Search Console 数据分析及持续优化。"},{"title":"SEO Specialist","source":"企业官网","region":"青岛","date":"2026-09-11","exp":"3 年以上","text":"Manage organic search strategy, technical SEO, content optimization, reporting and cross-team execution."},{"title":"SEO 优化师","source":"招聘平台","region":"青岛","date":"2026-08-29","exp":"1–3 年","text":"负责站内优化、关键词布局、内容优化、外链建设以及网站数据监控。"}],"skills":["SEO","Google","GA4","Search Console","WordPress","英文阅读","内容策略"],"conclusions":["普通执行型 SEO 可按市场中位区间招聘。","外贸独立站 SEO 若同时负责英文内容、技术优化和 WordPress，应高于普通执行岗。","3–5 年阶段更看重独立规划与跨团队推动能力。"],"recommendation":"青岛 3–5 年经验的多数来源集中在 8K–12K；若要求独立负责英文站并兼顾技术 SEO，可考虑 10K–13K。","trend":[["2022","6.5K–9K","估算"],["2023","7K–10K","估算"],["2024","7.5K–11K","估算"],["2025","8K–11K","估算"],["2026","8K–12K","当前研究"]]},{"id":"web","icon":"🧩","name":"网站建设专员","category":"网站 / 技术","summary":"负责企业官网建设、WordPress 主题与页面搭建、基础前端、域名主机及上线维护。","updated":"2026-09-26","jdCount":2,"memo":"观察：会 Elementor 的候选人较多，但真正同时具备 WordPress、前端基础和主机运维能力的人才层级差异较大。","profile":{"intro":"连接设计、前端、CMS 与网站运维的综合岗位。","duties":["WordPress 企业官网搭建","页面与主题样式调整","域名、SSL、主机与 CDN 基础维护","处理常见前端与插件冲突"],"requirements":["HTML/CSS/JS 基础","WordPress/Elementor","基础 PHP 更有优势","具备网站上线与排错经验"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-17","sample":21,"e1":"6K–8K","e2":"8K–12K","e3":"10K–15K"},{"name":"企业招聘样本","grade":"C","date":"2026-09-05","sample":8,"e1":"6K–9K","e2":"8K–13K","e3":"11K–16K","type":"企业官网"},{"name":"行业岗位样本","grade":"C","date":"2026-07-20","sample":10,"e1":"5K–8K","e2":"8K–11K","e3":"10K–14K"}],"上海":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-15","sample":35,"e1":"10K–14K","e2":"14K–20K","e3":"18K–26K"},{"name":"企业招聘样本","grade":"C","date":"2026-08-22","sample":12,"e1":"9K–14K","e2":"14K–21K","e3":"19K–28K","type":"企业官网"}]},"jds":[{"title":"WordPress 网站建设专员","source":"招聘平台","region":"青岛","date":"2026-09-15","exp":"3–5 年","text":"负责 WordPress 企业站搭建、Elementor 页面制作、主题样式修改及网站上线维护。"},{"title":"Web Specialist","source":"企业官网","region":"上海","date":"2026-08-22","exp":"3 年以上","text":"Maintain company websites, coordinate landing pages, troubleshoot front-end issues and support CMS operations."}],"skills":["WordPress","Elementor","HTML","CSS","JavaScript","PHP","Cloudflare","主机运维"],"conclusions":["纯页面搭建与综合网站建设岗位应分层定薪。","具备前端排错、PHP 基础和运维能力后，岗位更接近 Web Specialist。","实际项目作品比单纯证书更重要。"],"recommendation":"青岛 3–5 年若仅做页面搭建约 8K–10K；若能独立建站并处理主机、DNS、缓存、插件冲突，可向 10K–13K 靠拢。","trend":[["2022","6K–8K","估算"],["2023","6.5K–9K","估算"],["2024","7K–10K","估算"],["2025","7.5K–11K","估算"],["2026","8K–12K","当前研究"]]},{"id":"sales","icon":"🌍","name":"海外销售","category":"销售 / 外贸","summary":"负责海外客户开发、询盘跟进、报价谈判、客户维护和订单推进，常与英文能力及行业经验绑定。","updated":"2026-09-24","jdCount":2,"memo":"底薪差异不一定能代表总收入，需要后续把佣金结构、提成口径和成熟市场/新市场拆开研究。","profile":{"intro":"典型结果导向岗位，底薪只是总薪酬的一部分。","duties":["海外客户开发","询盘与邮件跟进","报价、谈判与合同推进","客户关系与回款跟踪"],"requirements":["英文沟通能力","B2B 销售经验","产品与行业理解","目标与业绩管理"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-16","sample":42,"e1":"6K–10K","e2":"8K–15K","e3":"10K–20K"},{"name":"智联招聘","grade":"B","date":"2026-09-08","sample":26,"e1":"6K–9K","e2":"8K–14K","e3":"10K–18K"},{"name":"企业招聘样本","grade":"C","date":"2026-08-28","sample":11,"e1":"7K–10K","e2":"9K–16K","e3":"12K–22K","type":"企业官网"}],"深圳":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-20","sample":61,"e1":"8K–13K","e2":"12K–20K","e3":"16K–28K"},{"name":"智联招聘","grade":"B","date":"2026-09-12","sample":34,"e1":"8K–12K","e2":"11K–18K","e3":"15K–25K"},{"name":"企业招聘样本","grade":"C","date":"2026-09-01","sample":15,"e1":"9K–14K","e2":"13K–21K","e3":"18K–30K","type":"企业官网"}],"上海":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-19","sample":54,"e1":"9K–14K","e2":"13K–21K","e3":"18K–30K"},{"name":"行业招聘报告","grade":"A","date":"2026-07-10","sample":"—","e1":"9K–14K","e2":"13K–20K","e3":"17K–28K","type":"行业报告"}]},"jds":[{"title":"海外销售经理","source":"招聘平台","region":"青岛","date":"2026-09-15","exp":"3–5 年","text":"负责海外 B2B 客户开发、报价谈判、订单推进及重点客户维护。"},{"title":"International Sales","source":"企业官网","region":"深圳","date":"2026-09-01","exp":"3 年以上","text":"Develop distributors, manage leads, negotiate commercial terms and achieve regional revenue targets."}],"skills":["英语","客户开发","谈判","CRM","B2B","报价","渠道开发"],"conclusions":["底薪必须和佣金、提成结构一起看。","成熟客户维护型与新市场开拓型岗位难度不同。","行业经验、客户资源和英语谈判能力会明显拉开总收入。"],"recommendation":"青岛 3–5 年底薪可重点观察 8K–15K，但应单独记录提成结构，不能只用月薪区间判断岗位吸引力。","trend":[["2022","7K–11K","估算"],["2023","7.5K–12K","估算"],["2024","8K–13K","估算"],["2025","8K–14K","估算"],["2026","8K–15K","当前研究"]]},{"id":"designer","icon":"🎨","name":"平面 / 视觉设计","category":"设计","summary":"负责品牌视觉、宣传物料、电商或官网视觉设计。不同岗位对品牌、UI、电商和视频能力要求差异明显。","updated":"2026-09-21","jdCount":1,"memo":"需要防止把“平面设计、UI、网页视觉、电商美工”混成一个岗位。后续建议拆成子岗位。","profile":{"intro":"视觉表达岗位，需要结合实际业务场景区分。","duties":["品牌与宣传物料设计","官网 / 电商视觉支持","活动与社媒素材制作","维护视觉规范"],"requirements":["Photoshop / Illustrator","作品集","基础排版与品牌意识","会 Figma / 视频更有优势"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-13","sample":25,"e1":"5K–8K","e2":"7K–10K","e3":"9K–13K"},{"name":"智联招聘","grade":"B","date":"2026-09-02","sample":18,"e1":"5K–7K","e2":"7K–10K","e3":"9K–12K"},{"name":"企业样本","grade":"C","date":"2026-08-18","sample":7,"e1":"6K–8K","e2":"8K–11K","e3":"10K–14K","type":"企业官网"}]},"jds":[{"title":"品牌视觉设计师","source":"招聘平台","region":"青岛","date":"2026-09-12","exp":"3–5 年","text":"负责品牌视觉、宣传册、官网图片、展会物料及社媒素材设计。"}],"skills":["Photoshop","Illustrator","Figma","品牌设计","排版","网页视觉"],"conclusions":["设计岗位必须看作品集质量。","会网页视觉与 Figma 的候选人可覆盖更广业务。","不要把大量视频剪辑要求无成本叠加到平面岗位。"],"recommendation":"青岛 3–5 年常见区间约 7K–10K；若要求品牌体系 + 官网视觉 + Figma，可考虑 8K–12K。","trend":[["2022","5.5K–8K","估算"],["2023","6K–8.5K","估算"],["2024","6.5K–9K","估算"],["2025","7K–9.5K","估算"],["2026","7K–10K","当前研究"]]},{"id":"ads","icon":"📣","name":"Google Ads 投放","category":"数字营销","summary":"负责 Google Ads 账户、关键词、预算、转化追踪与广告优化，常与外贸获客、GA4/GTM 一起出现。","updated":"2026-09-19","jdCount":1,"memo":"投放岗位不能只看操作年限，更要看预算规模、行业、转化追踪能力和真实 ROI 经验。","profile":{"intro":"以付费流量和转化效率为目标的效果营销岗位。","duties":["Google Ads 账户搭建与优化","预算和关键词管理","转化追踪与归因","报表与 ROI 分析"],"requirements":["Google Ads 实操","GA4 / GTM","数据分析","英文广告素材理解"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-09","sample":14,"e1":"6K–9K","e2":"8K–13K","e3":"11K–18K"},{"name":"企业招聘样本","grade":"C","date":"2026-08-25","sample":6,"e1":"7K–10K","e2":"9K–14K","e3":"12K–20K","type":"企业官网"}],"深圳":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-14","sample":29,"e1":"9K–14K","e2":"13K–20K","e3":"18K–28K"},{"name":"企业样本","grade":"C","date":"2026-08-19","sample":9,"e1":"10K–15K","e2":"14K–22K","e3":"20K–30K","type":"企业官网"}]},"jds":[{"title":"Google Ads 优化师","source":"招聘平台","region":"青岛","date":"2026-09-08","exp":"3–5 年","text":"负责 Google Ads 账户搭建、预算分配、关键词和广告创意测试，结合 GA4/GTM 进行转化分析。"}],"skills":["Google Ads","GA4","GTM","PPC","转化追踪","数据分析"],"conclusions":["预算规模和 ROI 经验比纯年限更重要。","懂 GTM 和转化追踪可明显提高岗位价值。","外贸 B2B 场景应关注询盘质量而不只是 CPL。"],"recommendation":"青岛 3–5 年可重点看 8K–13K；若能独立处理 GTM、归因与较大广告预算，可向更高区间靠拢。","trend":[["2022","6.5K–9K","估算"],["2023","7K–10K","估算"],["2024","7.5K–11K","估算"],["2025","8K–12K","估算"],["2026","8K–13K","当前研究"]]},{"id":"content","icon":"✍️","name":"英文内容运营","category":"内容 / 营销","summary":"负责英文网站、博客、社媒或营销资料内容生产与维护，常与 SEO、行业理解和 AI 辅助写作结合。","updated":"2026-09-18","jdCount":1,"memo":"随着 AI 写作普及，岗位价值可能从纯写作转向选题、研究、编辑、品牌语气和事实核验。","profile":{"intro":"连接产品知识、英文表达与内容营销的岗位。","duties":["英文博客与官网内容","产品与解决方案文案","内容日历与选题","SEO 协作与内容更新"],"requirements":["英语写作","内容编辑","基础 SEO","行业研究能力"]},"regions":{"青岛":[{"name":"BOSS 直聘","grade":"B","date":"2026-09-07","sample":16,"e1":"6K–8K","e2":"8K–11K","e3":"10K–14K"},{"name":"企业招聘样本","grade":"C","date":"2026-08-16","sample":7,"e1":"6K–9K","e2":"8K–12K","e3":"10K–15K","type":"企业官网"}]},"jds":[{"title":"英文内容运营","source":"企业招聘","region":"青岛","date":"2026-09-06","exp":"3–5 年","text":"负责英文官网、博客及营销内容策划与编辑，配合 SEO 团队进行关键词和内容更新。"}],"skills":["英文写作","内容编辑","SEO","AI 写作","行业研究","WordPress"],"conclusions":["纯翻译与内容运营应区分。","AI 降低初稿成本，但提高了编辑、研究与事实核验的重要性。","懂 SEO 和 CMS 的内容人员更适合独立站团队。"],"recommendation":"青岛 3–5 年约 8K–11K；若兼具 SEO、WordPress 和行业内容策划能力，可考虑 9K–12K。","trend":[["2022","5.5K–8K","估算"],["2023","6K–8.5K","估算"],["2024","6.5K–9.5K","估算"],["2025","7K–10K","估算"],["2026","8K–11K","当前研究"]]}];
+
+const STORAGE_KEY = "job_research_workbench_v020";
+const UI_STATE_KEY = "job_research_workbench_ui_v030";
+const SNAPSHOT_KEY = "job_research_workbench_snapshots_v031";
+const SNAPSHOT_LIMIT = 20;
+const EXPERIENCE_OPTIONS = {e1:"1–3 年",e2:"3–5 年",e3:"5 年以上"};
+const REGION_OPTIONS = ["全国","北京","上海","深圳","广州","杭州","南京","苏州","青岛","济南","天津","成都","武汉","西安","厦门","宁波"];
+const SOURCE_TYPES = ["招聘平台","企业官网","行业报告","官方统计","猎头/机构","人工调研","其他"];
+const SOURCE_STATUS = {valid:"有效",review:"待复核",expired:"过期",archived:"已废弃"};
+let DB = loadDB();
+let uiState = loadUIState();
+let current = DB.find(j=>j.id===uiState.jobId) || DB[0];
+let currentRegion = current && Object.keys(current.regions || {}).includes(uiState.region)
+  ? uiState.region
+  : (current ? Object.keys(current.regions || {})[0] : "");
+let currentExp = ["e1","e2","e3"].includes(uiState.exp) ? uiState.exp : "e2";
+let modalDirty = false;
+let modalBusy = false;
+
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+
+
+function normalizeRegionName(name){
+  const raw=String(name||"").trim();
+  if(!raw) return "";
+  const map={
+    "青岛市":"青岛","山东青岛":"青岛","Qingdao":"青岛",
+    "北京市":"北京","上海市":"上海","深圳市":"深圳","广州市":"广州",
+    "杭州市":"杭州","南京市":"南京","苏州市":"苏州","济南市":"济南",
+    "天津市":"天津","成都市":"成都","武汉市":"武汉","西安市":"西安",
+    "厦门市":"厦门","宁波市":"宁波"
+  };
+  return map[raw]||raw;
+}
+function inferSourceType(name){
+  const n=String(name||"");
+  if(/统计局|官方/.test(n)) return "官方统计";
+  if(/报告|薪酬/.test(n)) return "行业报告";
+  if(/企业|官网/.test(n)) return "企业官网";
+  if(/猎头|机构/.test(n)) return "猎头/机构";
+  if(/手工|人工/.test(n)) return "人工调研";
+  if(/BOSS|智联|前程|猎聘|招聘/.test(n)) return "招聘平台";
+  return "其他";
+}
+function deriveSourceStatus(row){
+  if(row?.status && SOURCE_STATUS[row.status]) return row.status;
+  const days=freshness(row?.date);
+  if(days>365) return "expired";
+  if(days>180) return "review";
+  return "valid";
+}
+function migrateDB(raw){
+  const jobs=Array.isArray(raw)?raw:[];
+  return jobs.map(job=>{
+    const regions={};
+    Object.entries(job.regions||{}).forEach(([region,rows])=>{
+      const nr=normalizeRegionName(region)||region;
+      if(!regions[nr]) regions[nr]=[];
+      (rows||[]).forEach(row=>{
+        regions[nr].push({
+          name:row.name||"",
+          type:row.type||inferSourceType(row.name),
+          url:row.url||"",
+          grade:row.grade||"C",
+          status:deriveSourceStatus(row),
+          date:row.date||"",
+          sample:row.sample??"—",
+          e1:row.e1||"",
+          e2:row.e2||"",
+          e3:row.e3||"",
+          note:row.note||""
+        });
+      });
+    });
+    return {
+      ...job,
+      regions,
+      jdCount:(job.jds||[]).length,
+      jds:(job.jds||[]).map(j=>({...j,region:normalizeRegionName(j.region)||j.region}))
+    };
+  });
+}
+
+function loadDB(){
+  try{
+    const saved=localStorage.getItem(STORAGE_KEY);
+    if(saved){
+      const parsed=JSON.parse(saved);
+      if(Array.isArray(parsed) && parsed.length) return migrateDB(parsed);
+    }
+  }catch(e){}
+  return migrateDB(JSON.parse(JSON.stringify(SEED_DB)));
+}
+function loadUIState(){
+  try{return JSON.parse(localStorage.getItem(UI_STATE_KEY)||"{}")}catch(e){return {}}
+}
+function saveUIState(patch={}){
+  uiState={...uiState,...patch};
+  localStorage.setItem(UI_STATE_KEY,JSON.stringify(uiState));
+}
+function saveDB(message){
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(DB));
+  if(message) showToast(message,"success");
+}
+function showToast(msg,type="success"){
+  const t=$("#toast");
+  if(!t) return;
+  t.textContent=msg;
+  t.className="toast "+type+" show";
+  clearTimeout(showToast._t);
+  showToast._t=setTimeout(()=>{t.className="toast"},1900);
+}
+function midpoint(range){
+  const nums=(String(range||"").match(/\d+(\.\d+)?/g)||[]).map(Number);
+  return nums.length>=2?(nums[0]+nums[1])/2:(nums[0]||0);
+}
+function parseSalaryRange(range){
+  const nums=(String(range||"").match(/\d+(\.\d+)?/g)||[]).map(Number);
+  if(nums.length>=2) return {low:Math.min(nums[0],nums[1]),high:Math.max(nums[0],nums[1])};
+  if(nums.length===1) return {low:nums[0],high:nums[0]};
+  return null;
+}
+function niceSalaryScale(min,max){
+  let lo=Math.floor(min);
+  let hi=Math.ceil(max);
+  if(hi<=lo) hi=lo+1;
+  const span=hi-lo;
+  const pad=Math.max(1,Math.ceil(span*.12));
+  lo=Math.max(0,lo-pad);
+  hi=hi+pad;
+  return {min:lo,max:hi};
+}
+function freshness(date){
+  if(!date) return 9999;
+  const d=new Date(date+"T00:00:00"), now=new Date();
+  return Math.floor((now-d)/86400000);
+}
+function esc(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+}
+function uid(prefix="id"){return prefix+"_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+
+function ensureCurrent(){
+  if(!DB.length){
+    current=null; currentRegion="";
+    $("#jobList").innerHTML='<div class="empty">暂无岗位</div>';
+    $("#jobTitle").textContent="暂无岗位";
+    $("#jobSummary").textContent="请先新建一个岗位档案。";
+    $("#jobMeta").innerHTML="";
+    return false;
+  }
+  if(!current || !DB.find(x=>x.id===current.id)) current=DB[0];
+  const regions=Object.keys(current.regions||{});
+  if(!regions.includes(currentRegion)) currentRegion=regions[0]||"";
+  return true;
+}
+
+function renderJobs(){
+  const q=$("#search").value.trim().toLowerCase();
+  $("#jobList").innerHTML=DB.filter(j=>(j.name+j.category).toLowerCase().includes(q)).map(j=>{
+    const sources=Object.values(j.regions||{}).reduce((n,a)=>n+a.length,0);
+    return `<button class="job ${current&&j.id===current.id?'active':''}" data-id="${j.id}">
+      <div class="job-icon">${esc(j.icon||"📁")}</div>
+      <div><div class="job-name">${esc(j.name)}</div><div class="job-meta">${esc(j.category)}<br>${Object.keys(j.regions||{}).length} 个地区 · ${sources} 条薪酬来源</div></div>
+    </button>`;
+  }).join("") || '<div class="empty">没有匹配岗位</div>';
+  $$(".job").forEach(b=>b.onclick=()=>{current=DB.find(j=>j.id===b.dataset.id);currentRegion=Object.keys(current.regions||{})[0]||"";saveUIState({jobId:current.id,region:currentRegion});document.querySelector(".sidebar")?.classList.remove("mobile-open");renderAll()});
+}
+function renderHeader(){
+  if(!current) return;
+  $("#eyebrow").textContent=`岗位档案 / ${current.category}`;
+  $("#jobTitle").textContent=current.name;
+  $("#jobSummary").textContent=current.summary||"";
+  const srcCount=Object.values(current.regions||{}).reduce((n,a)=>n+a.length,0);
+  $("#jobMeta").innerHTML=`<span class="pill"><span class="dot"></span> 最近更新：${esc(current.updated||"—")}</span><span class="pill">${Object.keys(current.regions||{}).length} 个地区</span><span class="pill">${srcCount} 条薪酬来源</span><span class="pill">${current.jdCount||current.jds?.length||0} 份 JD 样本</span>`;
+  if($("#mobileJobName")) $("#mobileJobName").textContent=current.name;
+}
+function renderOverview(){
+  if(!current) return;
+  const sources=(current.regions||{})[currentRegion]||[];
+  const mids=sources.map(s=>midpoint(s.e2)).filter(Boolean);
+  const min=mids.length?Math.min(...mids):0,max=mids.length?Math.max(...mids):0;
+  const fresh=sources.filter(s=>freshness(s.date)<=180).length;
+  const pct=sources.length?Math.round(fresh/sources.length*100):0;
+  $("#metrics").innerHTML=`
+  <div class="metric"><div class="label">当前地区</div><div class="value">${esc(currentRegion||"—")}</div><div class="note">默认展示首个研究地区</div></div>
+  <div class="metric"><div class="label">3–5 年样本中心</div><div class="value">${mids.length?`${Math.round(min)}K–${Math.round(max)}K`:"—"}</div><div class="note">按来源区间中点观察</div></div>
+  <div class="metric"><div class="label">JD 样本</div><div class="value">${current.jdCount||current.jds?.length||0}</div><div class="note">原始资料与结构化结果分开</div></div>
+  <div class="metric"><div class="label">数据新鲜度</div><div class="value">${pct}%</div><div class="note">180 天内来源占比</div></div>`;
+  const p=current.profile||{intro:"",duties:[],requirements:[]};
+  $("#profileBox").innerHTML=`<div class="box"><h4>岗位简介</h4><p>${esc(p.intro||"")}</p></div>
+  <div class="box" style="margin-top:12px"><h4>核心职责</h4><ul>${(p.duties||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div class="box" style="margin-top:12px"><h4>常见要求</h4><ul>${(p.requirements||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
+  const old=Object.values(current.regions||{}).flat().filter(s=>freshness(s.date)>180).length;
+  $("#statusBox").innerHTML=`<div class="alert">${old?`有 ${old} 条薪酬来源超过 180 天，已标记为待复核。`:"当前薪酬来源均在 180 天新鲜度范围内。"}</div>
+  <div class="box" style="margin-top:12px"><h4>高频技能</h4><div class="skills">${(current.skills||[]).map(x=>`<span class="skill">${esc(x)}</span>`).join("")}</div></div>
+  <div class="box" style="margin-top:12px"><h4>下一轮建议</h4><p>优先补充较少地区或经验段的数据；继续保存原始 JD，不用为了自动化牺牲可追溯性。</p></div>`;
+}
+function renderSalaryControls(){
+  if(!current) return;
+  const regions=Object.keys(current.regions||{});
+  $("#regionSelect").innerHTML=regions.map(r=>`<option ${r===currentRegion?'selected':''}>${esc(r)}</option>`).join("");
+  $("#regionSelect").onchange=e=>{currentRegion=e.target.value;saveUIState({region:currentRegion});renderSalary();renderOverview()};
+  $("#expSelect").value=currentExp; $("#expSelect").onchange=e=>{currentExp=e.target.value;saveUIState({exp:currentExp});renderSalary()};
+}
+function renderSalary(){
+  if(!current) return;
+  const rows=(current.regions||{})[currentRegion]||[];
+  $("#salaryRows").innerHTML=rows.map((s,i)=>{
+    const status=deriveSourceStatus(s);
+    const statusLabel=SOURCE_STATUS[status]||status;
+    const type=s.type||inferSourceType(s.name);
+    return `<tr>
+      <td>
+        <strong>${esc(s.name)}</strong>
+        ${s.url?`<div class="source-meta"><a class="source-link" href="${esc(s.url)}" target="_blank" rel="noopener">查看来源</a></div>`:""}
+        ${s.note?`<div class="source-note">${esc(s.note)}</div>`:""}
+      </td>
+      <td><span class="tag ${status}">${esc(type)}</span> <span class="tag ${status}">${esc(statusLabel)}</span></td>
+      <td><span class="tag ${String(s.grade||'C').toLowerCase()}">${esc(s.grade||'C')}</span></td>
+      <td>${esc(s.date)}</td>
+      <td>${esc(s.sample)}</td>
+      <td><strong>${esc(s[currentExp]||"—")}</strong></td>
+      <td><div class="mini-actions"><button class="mini-btn salary-edit" data-i="${i}">编辑</button><button class="mini-btn danger salary-del" data-i="${i}">删除</button></div></td>
+    </tr>`;
+  }).join("") || '<tr><td colspan="7">当前地区暂无数据。</td></tr>';
+  const ranges=rows.map(s=>({source:s.name,label:s[currentExp]||"—",range:parseSalaryRange(s[currentExp])})).filter(x=>x.range);
+  if(ranges.length){
+    const minVal=Math.min(...ranges.map(x=>x.range.low));
+    const maxVal=Math.max(...ranges.map(x=>x.range.high));
+    const scale=niceSalaryScale(minVal,maxVal);
+    const span=scale.max-scale.min || 1;
+    const pos=v=>Math.max(0,Math.min(100,(v-scale.min)/span*100));
+    const tickCount=4;
+    const ticks=Array.from({length:tickCount+1},(_,i)=>scale.min+(span/tickCount)*i);
+    const consensusLow=Math.max(...ranges.map(x=>x.range.low));
+    const consensusHigh=Math.min(...ranges.map(x=>x.range.high));
+    const consensus=consensusLow<=consensusHigh ? `${consensusLow}K–${consensusHigh}K` : "暂无完全重合区间";
+
+    $("#salaryChart").innerHTML=`
+      <div class="salary-consensus">
+        <span>多来源共同区间</span>
+        <span class="salary-consensus-badge">${esc(consensus)}</span>
+        <span>${consensusLow<=consensusHigh ? "优先观察各来源重合部分" : "建议结合可信度与样本量判断"}</span>
+      </div>
+      <div class="salary-range-chart">
+        <div class="salary-range-axis">
+          <div></div>
+          <div class="salary-range-axis-track">
+            ${ticks.map(t=>`<span class="salary-range-tick" style="left:${pos(t)}%">${Number.isInteger(t)?t:t.toFixed(1)}K</span>`).join("")}
+          </div>
+        </div>
+        ${ranges.map(x=>{
+          const left=pos(x.range.low);
+          const right=pos(x.range.high);
+          const width=Math.max(1,right-left);
+          return `<div class="salary-range-row">
+            <div class="salary-range-name" title="${esc(x.source)}">${esc(x.source.replace("招聘",""))}</div>
+            <div class="salary-range-track">
+              <div class="salary-range-segment" style="left:${left}%;width:${width}%">
+                <span class="salary-range-value">${esc(x.label)}</span>
+              </div>
+            </div>
+          </div>`;
+        }).join("")}
+      </div>`;
+  }else{
+    $("#salaryChart").innerHTML='<div class="empty">暂无可绘制的薪资区间数据</div>';
+  }
+  $("#salaryConclusion").innerHTML=`<h4>当前判断</h4><p>${esc(current.recommendation||"尚未填写研究判断。")}</p>`;
+  $$(".salary-edit").forEach(b=>b.onclick=()=>openSalaryModal(Number(b.dataset.i)));
+  $$(".salary-del").forEach(b=>b.onclick=()=>deleteSalary(Number(b.dataset.i)));
+}
+function renderJD(){
+  if(!current) return;
+  $("#jdList").innerHTML=(current.jds||[]).map((j,i)=>`<div class="jd"><div class="jdtop"><div><div class="jdtitle">${esc(j.title)}</div><div class="jdmeta">${esc(j.region)} · ${esc(j.date)} · ${esc(j.exp)}</div></div><div class="mini-actions"><span class="tag b">${esc(j.source)}</span><button class="mini-btn jd-edit" data-i="${i}">编辑</button><button class="mini-btn danger jd-del" data-i="${i}">删除</button></div></div><div class="excerpt">${esc(j.text)}</div></div>`).join("") || '<div class="empty">暂无 JD 原始资料。</div>';
+  const p=current.profile||{intro:"",duties:[],requirements:[]};
+  $("#jdStructured").innerHTML=`<div class="box"><h4>岗位简介</h4><p>${esc(p.intro||"")}</p></div>
+  <div class="box" style="margin-top:12px"><h4>岗位职责</h4><ul>${(p.duties||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div class="box" style="margin-top:12px"><h4>任职要求</h4><ul>${(p.requirements||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div class="box" style="margin-top:12px"><h4>技能标签</h4><div class="skills">${(current.skills||[]).map(x=>`<span class="skill">${esc(x)}</span>`).join("")}</div></div>`;
+  $$(".jd-edit").forEach(b=>b.onclick=()=>openJdModal(Number(b.dataset.i)));
+  $$(".jd-del").forEach(b=>b.onclick=()=>deleteJd(Number(b.dataset.i)));
+}
+function renderResearch(){
+  if(!current) return;
+  $("#researchBox").innerHTML=`<div class="box"><h4>事实</h4><p>当前档案已收录 ${Object.values(current.regions||{}).flat().length} 条薪酬来源、${current.jdCount||current.jds?.length||0} 份 JD 样本，并按地区和经验段组织。</p></div>
+  <div class="box" style="margin-top:12px"><h4>判断</h4><ul>${(current.conclusions||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div class="box" style="margin-top:12px"><h4>招聘建议</h4><p>${esc(current.recommendation||"")}</p></div>`;
+  $("#memo").value=current.memo||"";
+  $("#memo").onchange=()=>{current.memo=$("#memo").value;touch();saveDB("研究备忘已保存")};
+}
+function renderTrend(){
+  if(!current) return;
+  $("#trendBox").innerHTML=(current.trend||[]).map(t=>`<div class="year ${t[2]==='当前研究'?'real':''}"><strong>${esc(t[0])}</strong><span>${esc(t[1])}</span><span>${esc(t[2])}</span></div>`).join("") || '<div class="empty">暂无趋势数据</div>';
+}
+function touch(){
+  if(current) current.updated=new Date().toISOString().slice(0,10);
+}
+function renderAll(){
+  if(!ensureCurrent()){renderJobs();return;}
+  renderJobs();renderHeader();renderOverview();renderSalaryControls();renderSalary();renderJD();renderResearch();renderTrend();
+}
+function setModalDirty(value=true){
+  modalDirty=value;
+  const modal=document.querySelector(".modal");
+  if(modal) modal.classList.toggle("is-dirty",modalDirty);
+}
+function bindDirtyTracking(){
+  const body=$("#modalBody");
+  if(!body) return;
+  body.querySelectorAll("input,select,textarea").forEach(el=>{
+    el.addEventListener("input",()=>setModalDirty(true));
+    el.addEventListener("change",()=>setModalDirty(true));
+  });
+}
+function openModal(title,body,buttons){
+  $("#modalTitle").textContent=title;
+  $("#modalBody").innerHTML=body;
+  $("#modalFoot").innerHTML=buttons;
+  modalBusy=false;
+  setModalDirty(false);
+  $("#modalMask").classList.add("open");
+  bindDirtyTracking();
+  setTimeout(()=>{
+    const first=$("#modalBody")?.querySelector("input:not([type=hidden]),select,textarea");
+    if(first) first.focus();
+  },0);
+}
+function closeModal(force=false){
+  if(modalBusy) return false;
+  if(!force && modalDirty){
+    const ok=confirm("当前表单还有未保存的修改，确定关闭吗？");
+    if(!ok) return false;
+  }
+  setModalDirty(false);
+  $("#modalMask").classList.remove("open");
+  return true;
+}
+function finishModalSave(message){
+  setModalDirty(false);
+  closeModal(true);
+  if(message) showToast(message,"success");
+}
+if($("#modalClose")) $("#modalClose").onclick=()=>closeModal(false);
+if($("#modalMask")) $("#modalMask").onclick=e=>{if(e.target.id==="modalMask") closeModal(false)};
+document.addEventListener("keydown",e=>{
+  const isOpen=$("#modalMask")?.classList.contains("open");
+  if(!isOpen) return;
+  if(e.key==="Escape"){e.preventDefault();closeModal(false);return}
+  if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==="s"){
+    e.preventDefault();
+    const primary=$("#modalFoot")?.querySelector(".btn.primary");
+    if(primary && !primary.disabled) primary.click();
+  }
+});
+
+function openJobModal(edit=false){
+  const j=edit?current:{icon:"📁",name:"",category:"",summary:"",profile:{intro:"",duties:[],requirements:[]},skills:[]};
+  openModal(edit?"编辑岗位档案":"新建岗位档案",`
+    <div class="form-grid job-form-grid">
+      <div class="field icon-field"><label>图标</label><input id="fIcon" value="${esc(j.icon||"📁")}"></div>
+      <div class="field name-field"><label>岗位名称</label><input id="fName" value="${esc(j.name||"")}"></div>
+      <div class="field category-field"><label>岗位分类</label><input id="fCategory" value="${esc(j.category||"")}"></div>
+      <div class="field skills-field"><label>技能标签（逗号分隔）</label><input id="fSkills" value="${esc((j.skills||[]).join(", "))}"></div>
+      <div class="field full"><label>岗位摘要</label><textarea id="fSummary">${esc(j.summary||"")}</textarea></div>
+      <div class="field full"><label>岗位简介</label><textarea id="fIntro">${esc(j.profile?.intro||"")}</textarea></div>
+      <div class="field full"><label>核心职责（每行一条）</label><textarea id="fDuties">${esc((j.profile?.duties||[]).join("\n"))}</textarea></div>
+      <div class="field full"><label>任职要求（每行一条）</label><textarea id="fRequirements">${esc((j.profile?.requirements||[]).join("\n"))}</textarea></div>
+    </div>`,
+    `${edit?'<button class="btn danger" id="deleteJobBtn">删除岗位</button>':''}<button class="btn" id="cancelModal">取消</button><button class="btn primary" id="saveJobBtn">保存</button>`
+  );
+  $("#cancelModal").onclick=()=>closeModal(false);
+  $("#saveJobBtn").onclick=()=>{
+    const name=$("#fName").value.trim();
+    if(!name){alert("请填写岗位名称");return}
+    const data={
+      icon:$("#fIcon").value.trim()||"📁",name,category:$("#fCategory").value.trim()||"未分类",
+      summary:$("#fSummary").value.trim(),skills:$("#fSkills").value.split(/[,，]/).map(x=>x.trim()).filter(Boolean),
+      profile:{intro:$("#fIntro").value.trim(),duties:$("#fDuties").value.split("\n").map(x=>x.trim()).filter(Boolean),requirements:$("#fRequirements").value.split("\n").map(x=>x.trim()).filter(Boolean)}
+    };
+    if(edit){
+      Object.assign(current,data); touch();
+    }else{
+      const job={id:uid("job"),updated:new Date().toISOString().slice(0,10),jdCount:0,memo:"",regions:{},jds:[],conclusions:[],recommendation:"",trend:[],...data};
+      DB.push(job);current=job;currentRegion="";saveUIState({tab:"overview"});
+    }
+    saveDB();setModalDirty(false);closeModal(true);showToast(edit?"岗位档案已更新":"岗位已创建","success");saveUIState({jobId:current.id,region:currentRegion});renderAll();
+  };
+  if(edit) $("#deleteJobBtn").onclick=()=>{
+    if(!confirm(`确定删除岗位“${current.name}”及其全部数据吗？`)) return;
+    DB=DB.filter(x=>x.id!==current.id);current=DB[0]||null;currentRegion=current?Object.keys(current.regions||{})[0]||"":"";
+    saveDB();setModalDirty(false);closeModal(true);showToast("岗位已删除","success");saveUIState({jobId:current?.id||"",region:currentRegion});renderAll();
+  };
+}
+function openSalaryModal(index=null){
+  if(!current){return}
+  const existing=index===null?{name:"",type:"招聘平台",url:"",grade:"B",status:"valid",date:new Date().toISOString().slice(0,10),sample:"",e1:"",e2:"",e3:"",note:""}:current.regions[currentRegion][index];
+  openModal(index===null?"添加薪酬来源":"编辑薪酬来源",`
+    <div class="form-grid">
+      <div class="field"><label>地区</label><select id="sRegion">${REGION_OPTIONS.map(r=>`<option ${normalizeRegionName(currentRegion)===r?"selected":""}>${r}</option>`).join("")}</select></div>
+      <div class="field"><label>来源名称</label><input id="sName" value="${esc(existing.name)}"></div>
+      <div class="field"><label>来源类型</label><select id="sType">${SOURCE_TYPES.map(t=>`<option ${existing.type===t?"selected":""}>${t}</option>`).join("")}</select></div>
+      <div class="field"><label>数据状态</label><select id="sStatus">${Object.entries(SOURCE_STATUS).map(([k,v])=>`<option value="${k}" ${deriveSourceStatus(existing)===k?"selected":""}>${v}</option>`).join("")}</select></div>
+      <div class="field"><label>可信度</label><select id="sGrade"><option ${existing.grade==="A"?"selected":""}>A</option><option ${existing.grade==="B"?"selected":""}>B</option><option ${existing.grade==="C"?"selected":""}>C</option></select></div>
+      <div class="field"><label>样本日期</label><input id="sDate" type="date" value="${esc(existing.date)}"></div>
+      <div class="field"><label>样本量</label><input id="sSample" value="${esc(existing.sample)}"></div>
+      <div class="field"><label>来源链接</label><input id="sUrl" type="text" placeholder="https://..." value="${esc(existing.url||"")}"></div>
+      <div class="field"><label>1–3 年</label><input id="sE1" placeholder="如 6K–9K" value="${esc(existing.e1)}"></div>
+      <div class="field"><label>3–5 年</label><input id="sE2" placeholder="如 8K–12K" value="${esc(existing.e2)}"></div>
+      <div class="field"><label>5 年以上</label><input id="sE3" placeholder="如 10K–15K" value="${esc(existing.e3)}"></div>
+      <div class="field full"><label>备注</label><textarea id="sNote" placeholder="例如：以外贸 SEO 岗位为主，薪资不含提成">${esc(existing.note||"")}</textarea></div>
+    </div>`,
+    `<button class="btn" id="cancelModal">取消</button><button class="btn primary" id="saveSalaryBtn">保存</button>`
+  );
+  $("#cancelModal").onclick=()=>closeModal(false);
+  $("#saveSalaryBtn").onclick=()=>{
+    const region=normalizeRegionName($("#sRegion").value.trim()),name=$("#sName").value.trim();
+    if(!region||!name){alert("请填写地区和来源名称");return}
+    const row={
+      name,
+      type:$("#sType").value,
+      url:$("#sUrl").value.trim(),
+      grade:$("#sGrade").value,
+      status:$("#sStatus").value,
+      date:$("#sDate").value,
+      sample:$("#sSample").value.trim()||"—",
+      e1:$("#sE1").value.trim(),
+      e2:$("#sE2").value.trim(),
+      e3:$("#sE3").value.trim(),
+      note:$("#sNote").value.trim()
+    };
+    if(index===null){
+      if(!current.regions[region]) current.regions[region]=[];
+      current.regions[region].push(row);
+      currentRegion=region;
+    }else{
+      const oldRegion=currentRegion;
+      if(region===oldRegion) current.regions[oldRegion][index]=row;
+      else{
+        current.regions[oldRegion].splice(index,1);
+        if(!current.regions[region]) current.regions[region]=[];
+        current.regions[region].push(row);
+        if(!current.regions[oldRegion].length) delete current.regions[oldRegion];
+        currentRegion=region;
+      }
+    }
+    touch();saveDB();setModalDirty(false);closeModal(true);showToast("薪酬来源已保存","success");saveUIState({region:currentRegion});renderAll();
+  };
+}
+function deleteSalary(index){
+  if(!confirm("确定删除这条薪酬来源吗？\n\n删除后仍可通过之前导出的 JSON 备份恢复。")) return;
+  current.regions[currentRegion].splice(index,1);
+  if(!current.regions[currentRegion].length){delete current.regions[currentRegion];currentRegion=Object.keys(current.regions)[0]||""}
+  touch();saveDB("薪酬来源已删除");renderAll();
+}
+function openJdModal(index=null){
+  const j=index===null?{title:"",source:"招聘平台",region:currentRegion,date:new Date().toISOString().slice(0,10),exp:"3–5 年",text:""}:current.jds[index];
+  openModal(index===null?"添加 JD 原始资料":"编辑 JD 原始资料",`
+   <div class="form-grid">
+    <div class="field"><label>岗位标题</label><input id="jTitle" value="${esc(j.title)}"></div>
+    <div class="field"><label>来源</label><input id="jSource" value="${esc(j.source)}"></div>
+    <div class="field"><label>地区</label><input id="jRegion" value="${esc(j.region)}"></div>
+    <div class="field"><label>日期</label><input id="jDate" type="date" value="${esc(j.date)}"></div>
+    <div class="field"><label>经验</label><input id="jExp" value="${esc(j.exp)}"></div>
+    <div class="field full"><label>原始 JD 内容</label><textarea id="jText">${esc(j.text)}</textarea></div>
+   </div>`,
+   `<button class="btn" id="cancelModal">取消</button><button class="btn primary" id="saveJdBtn">保存</button>`
+  );
+  $("#cancelModal").onclick=()=>closeModal(false);
+  $("#saveJdBtn").onclick=()=>{
+    const row={title:$("#jTitle").value.trim(),source:$("#jSource").value.trim(),region:$("#jRegion").value.trim(),date:$("#jDate").value,exp:$("#jExp").value.trim(),text:$("#jText").value.trim()};
+    if(!row.title){alert("请填写岗位标题");return}
+    if(index===null) current.jds.push(row); else current.jds[index]=row;
+    current.jdCount=current.jds.length;touch();saveDB();setModalDirty(false);closeModal(true);showToast("JD 已保存","success");renderAll();
+  };
+}
+function deleteJd(index){
+  if(!confirm("确定删除这条 JD 原始资料吗？\n\n此操作不会影响岗位画像，但原始资料将从当前浏览器数据中移除。")) return;
+  current.jds.splice(index,1);current.jdCount=current.jds.length;touch();saveDB("JD 已删除");renderAll();
+}
+function openResearchModal(){
+  openModal("编辑研究结论",`
+   <div class="form-grid">
+    <div class="field full"><label>判断（每行一条）</label><textarea id="rConclusions">${esc((current.conclusions||[]).join("\n"))}</textarea></div>
+    <div class="field full"><label>招聘建议</label><textarea id="rRecommendation">${esc(current.recommendation||"")}</textarea></div>
+    <div class="field full"><label>研究备忘</label><textarea id="rMemo">${esc(current.memo||"")}</textarea></div>
+   </div>`,
+   `<button class="btn" id="cancelModal">取消</button><button class="btn primary" id="saveResearchBtn">保存</button>`
+  );
+  $("#cancelModal").onclick=()=>closeModal(false);
+  $("#saveResearchBtn").onclick=()=>{
+    current.conclusions=$("#rConclusions").value.split("\n").map(x=>x.trim()).filter(Boolean);
+    current.recommendation=$("#rRecommendation").value.trim();
+    current.memo=$("#rMemo").value.trim();
+    touch();saveDB();setModalDirty(false);closeModal(true);showToast("研究结论已保存","success");renderAll();
+  };
+}
+
+function exportData(){
+  const payload={app:"岗位研究工作台",version:"1.0.0",schema_version:"2.0",exported_at:new Date().toISOString(),jobs:DB};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=`job-research-workbench-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url);showToast("JSON 备份已导出","success");
+}
+function importData(file){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const parsed=JSON.parse(reader.result);
+      const jobs=Array.isArray(parsed)?parsed:parsed.jobs;
+      if(!Array.isArray(jobs)) throw new Error("JSON 中没有 jobs 数组");
+      if(!confirm(`将导入 ${jobs.length} 个岗位并覆盖当前数据，是否继续？`)) return;
+      DB=migrateDB(jobs);current=DB[0]||null;currentRegion=current?Object.keys(current.regions||{})[0]||"":"";
+      saveDB();saveUIState({jobId:current?.id||"",region:currentRegion});showToast("JSON 已导入","success");renderAll();
+    }catch(e){alert("导入失败："+e.message)}
+  };
+  reader.readAsText(file,"utf-8");
+}
+
+function loadSnapshots(){
+  try{
+    const data=JSON.parse(localStorage.getItem(SNAPSHOT_KEY)||"[]");
+    return Array.isArray(data)?data:[];
+  }catch(e){return []}
+}
+function saveSnapshots(list){
+  localStorage.setItem(SNAPSHOT_KEY,JSON.stringify(list.slice(0,SNAPSHOT_LIMIT)));
+}
+function createSnapshot(){
+  const list=loadSnapshots();
+  const now=new Date();
+  const snapshot={
+    id:"snap_"+Date.now(),
+    created_at:now.toISOString(),
+    label:now.toLocaleString("zh-CN",{hour12:false}),
+    job_count:DB.length,
+    source_count:DB.reduce((sum,j)=>sum+Object.values(j.regions||{}).flat().length,0),
+    jd_count:DB.reduce((sum,j)=>sum+(j.jds||[]).length,0),
+    jobs:JSON.parse(JSON.stringify(DB))
+  };
+  list.unshift(snapshot);
+  saveSnapshots(list);
+  renderSnapshots();
+  showToast("已创建本地快照","success");
+}
+function restoreSnapshot(id){
+  const snap=loadSnapshots().find(x=>x.id===id);
+  if(!snap) return;
+  if(!confirm(`确定恢复 ${snap.label} 的快照吗？\n\n当前数据会被该快照覆盖，建议先导出 JSON 备份。`)) return;
+  DB=JSON.parse(JSON.stringify(snap.jobs||[]));
+  current=DB[0]||null;
+  currentRegion=current?Object.keys(current.regions||{})[0]||"":"";
+  saveDB();
+  saveUIState({jobId:current?.id||"",region:currentRegion});
+  renderAll();
+  renderSnapshots();
+  showToast("快照已恢复","success");
+}
+function deleteSnapshot(id){
+  const list=loadSnapshots();
+  const snap=list.find(x=>x.id===id);
+  if(!snap) return;
+  if(!confirm(`确定删除 ${snap.label} 的快照吗？`)) return;
+  saveSnapshots(list.filter(x=>x.id!==id));
+  renderSnapshots();
+  showToast("快照已删除","success");
+}
+function renderSnapshots(){
+  const box=$("#snapshotList");
+  if(!box) return;
+  const list=loadSnapshots();
+  if(!list.length){
+    box.innerHTML='<div class="snapshot-empty">暂无快照。建议在进行较大修改前创建一个快照。</div>';
+    return;
+  }
+  box.innerHTML=list.map(s=>`<div class="snapshot-item">
+    <div class="snapshot-info">
+      <div class="snapshot-time">${esc(s.label||s.created_at)}</div>
+      <div class="snapshot-meta">${s.job_count||0} 个岗位 · ${s.source_count||0} 条薪酬来源 · ${s.jd_count||0} 条 JD</div>
+    </div>
+    <div class="snapshot-actions">
+      <button class="mini-btn snap-restore" data-id="${s.id}">恢复</button>
+      <button class="mini-btn danger snap-delete" data-id="${s.id}">删除</button>
+    </div>
+  </div>`).join("");
+  $$(".snap-restore").forEach(b=>b.onclick=()=>restoreSnapshot(b.dataset.id));
+  $$(".snap-delete").forEach(b=>b.onclick=()=>deleteSnapshot(b.dataset.id));
+}
+
+function resetDemo(){
+  if(!confirm("恢复演示数据会覆盖当前浏览器中的工作台数据，是否继续？")) return;
+  DB=migrateDB(JSON.parse(JSON.stringify(SEED_DB)));current=DB[0];currentRegion=Object.keys(current.regions)[0];
+  saveDB();saveUIState({jobId:current.id,region:currentRegion});showToast("已恢复演示数据","success");renderAll();
+}
+
+function activateTab(tabId,remember=true){
+  const target=document.querySelector(`.tab[data-tab="${tabId}"]`);
+  const panel=$("#"+tabId);
+  if(!target||!panel) return;
+  $$(".tab").forEach(x=>x.classList.remove("active"));
+  $$(".panel").forEach(x=>x.classList.remove("active"));
+  target.classList.add("active");
+  panel.classList.add("active");
+  if($("#mobileTabSelect")) $("#mobileTabSelect").value=tabId;
+  if(remember) saveUIState({tab:tabId});
+}
+$$(".tab").forEach(t=>t.onclick=()=>activateTab(t.dataset.tab,true));
+if($("#mobileJobToggle")) $("#mobileJobToggle").onclick=()=>{
+  document.querySelector(".sidebar")?.classList.toggle("mobile-open");
+};
+if($("#mobileTabSelect")) $("#mobileTabSelect").onchange=e=>activateTab(e.target.value,true);
+if($("#search")) $("#search").oninput=renderJobs;
+if($("#exportBtn")) $("#exportBtn").onclick=exportData;
+if($("#exportBtn2")) $("#exportBtn2").onclick=exportData;
+if($("#newBtn")) $("#newBtn").onclick=()=>openJobModal(false);
+if($("#editBtn")) $("#editBtn").onclick=()=>current&&openJobModal(true);
+if($("#addSalaryBtn")) $("#addSalaryBtn").onclick=()=>current&&openSalaryModal(null);
+if($("#addJdBtn")) $("#addJdBtn").onclick=()=>current&&openJdModal(null);
+if($("#editResearchBtn")) $("#editResearchBtn").onclick=()=>current&&openResearchModal();
+if($("#importBtn")) $("#importBtn").onclick=()=>$("#importInput")&&$("#importInput").click();
+if($("#snapshotBtn")) $("#snapshotBtn").onclick=createSnapshot;
+if($("#importInput")) $("#importInput").onchange=e=>{if(e.target.files[0]) importData(e.target.files[0]); e.target.value=""};
+
+const dataActions = document.querySelector("#data .actions");
+if(dataActions){
+  const reset=document.createElement("button");reset.className="btn danger";reset.textContent="恢复演示数据";reset.onclick=resetDemo;dataActions.appendChild(reset);
+}
+
+renderAll();
+renderSnapshots();
+activateTab(uiState.tab||"overview",false);
+</script>
+
+
+</body>
+</html>
